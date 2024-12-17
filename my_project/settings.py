@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
+if os.path.isfile('env.py'):
+    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +29,10 @@ SECRET_KEY = 'django-insecure-rzvcrml0a$#!%i05t%2js(^cb##4id%45eo2brdf&c=5rvf3d2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["8000-haashimh1-deploma4-sk0ewhjvwtc.ws.codeinstitute-ide.net"]
+ALLOWED_HOSTS = [
+    '8000-haashimh1-deploma4-sk0ewhjvwtc.ws.codeinstitute-ide.net',  # Replace with your Gitpod workspace URL
+]
+
 
 
 # Application definition
@@ -38,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "pjobs"
+    "pjobs",
 ]
 
 MIDDLEWARE = [
@@ -76,10 +83,7 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 
