@@ -30,7 +30,15 @@ SECRET_KEY = 'django-insecure-rzvcrml0a$#!%i05t%2js(^cb##4id%45eo2brdf&c=5rvf3d2
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-haashimh1-deploma4-sk0ewhjvwtc.ws.codeinstitute-ide.net',  # Replace with your Gitpod workspace URL
+    '8000-haashimh1-deploma4-sk0ewhjvwtc.ws.codeinstitute-ide.net',
+]
+
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+
+    'https://8000-haashimh1-deploma4-sk0ewhjvwtc.ws.codeinstitute-ide.net',
 ]
 
 
@@ -44,8 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "users",
 
-    "pjobs",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +135,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'dashboard'  # Redirect users here after logging in
+LOGOUT_REDIRECT_URL = 'home'     # Redirect users here after logging out
+LOGIN_URL = 'login'              # Redirect unauthenticated users here
+
