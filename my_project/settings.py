@@ -140,3 +140,9 @@ LOGIN_REDIRECT_URL = 'dashboard'  # Redirect users here after logging in
 LOGOUT_REDIRECT_URL = 'home'     # Redirect users here after logging out
 LOGIN_URL = 'login'              # Redirect unauthenticated users here
 
+STATIC_URL = '/static/'  # The URL prefix for serving static files
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Tell Django to look for static files in the 'static' folder at the project root
+]
+
