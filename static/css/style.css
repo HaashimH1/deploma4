@@ -1,43 +1,144 @@
-/* General Styles */
+/* GOOGLE FONTS IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* wildcard selectoe to reset all browser default style rules */
+* {
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* variables to define accent colours */
+:root {
+    --accent: #10a37f;
+}
+
+html {
+    font-size: 100%;
+    /* Sets the base font size to 16px */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: black;
+    color: white;
+    font-family: "Nunito";
 }
 
 header {
-    background-color: #007bff;
+    background-color: black;
     color: white;
-    padding: 15px;
-    text-align: center;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 10px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    text-decoration: underline;
+    width: 100%;
+    height: 4em;
+    padding: 0 2em;
 }
 
 main {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 600px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: .25em 1em;
+    padding-bottom: 1em;
+
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
+
+footer {
+
+    
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+}
+
+.nav-left {
+    gap: 1em;
+    cursor: pointer;
+}
+
+.nav-right {
+    gap: 3em;
+}
+
+.nav-logo {
+    height: 3.5em;
+}
+
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-button {
+    padding: .5em 1em;
+    border-radius: 10px;
+    background-color: #202020;
+
+}
+
+.nav-buttons-hover {
+
+    background-color: var(--accent);
+
+    transition: all;
+    transition-duration: 0.3s;
+}
+
+.main-segments {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 3em;
+    width: 100%;
+    
+
+}
+
+.hero-segment {
+    background-color: black;
+    height: 20em;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.hero-segment h1{
+    font-size: 5em;
+    display: none;
+}
+
+.hero-segment p{
+    display: none;
+}
+
+.info-segment {
+    background-color: #202020;
+    height: 40em;
+    border-radius: 3px;
+}
+
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+
 
 /* Form Styles */
 form {
@@ -48,7 +149,6 @@ form {
 label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555;
 }
 
 input[type="text"],
@@ -66,21 +166,21 @@ button {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    border-color: #007bff;
+    border-color: green;
     outline: none;
 }
 
 input[type="submit"],
 button {
-    background-color: #007bff;
+    background-color: black;
     color: white;
-    border: none;
+    border: green solid 2px;
     cursor: pointer;
 }
 
 input[type="submit"]:hover,
 button:hover {
-    background-color: #0056b3;
+    background-color: green;
 }
 
 .error {
