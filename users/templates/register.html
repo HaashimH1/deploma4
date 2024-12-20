@@ -1,18 +1,59 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block title %}Register{% endblock %}
+{% block title %}Register{% endblock %} 
 
 {% block content %}
-<h1>Register</h1>
-<form method="post">
+<div class="register-container">
+
+  <h1>Register</h1>
+
+  <form method="post" class="register-form">
     {% csrf_token %}
+    
+    
+    <div class="text-fields-group-container">
+    <!-- Username Field -->
+    <div class="text-fields-container">
+        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        {{ form.username }}
+    </div>
+    
+    <!-- Email Field -->
+    <div class="text-fields-container">
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+    </div>
+    
+    <!-- Password1 Field -->
+    <div class="text-fields-container">
+        <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+        {{ form.password1 }}
+    </div>
+    
+    <!-- Password2 Field -->
+    <div class="text-fields-container">
+        <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+        {{ form.password2 }}
+    </div>
+    </div>
+
+   <!-- Error messages -->
     {% if form.errors %}
-        <div class="error">
-            Please correct the errors below.
-        </div>
+    <div class="form-errors">
+        <p>Please correct the following errors:</p>
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
-    {{ form.as_p }}
-    <input type="submit" value="Register">
-</form>
+    
+    <input type="submit" value="Register" class="submit-btn" />
+
+  </form>
+</div>
 {% endblock %}
 
