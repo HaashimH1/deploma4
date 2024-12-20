@@ -3,15 +3,39 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>Login</h1>
-<form method="post">
+<div class="login-container">
+
+  <h1>Login</h1>
+
+  <form method="post" class="login-form">
     {% csrf_token %}
+    
+
+    <div class="text-fields-group-container">
+    <!-- Username Field -->
+    <div class="text-fields-container">
+        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        {{ form.username }}
+    </div>
+    
+    <!-- Password Field -->
+    <div class="text-fields-container">
+        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+        {{ form.password }}
+    </div>
+   </div>
+    
+    <!-- Error messages -->
     {% if form.errors %}
-        <div class="error">
-            Invalid username or password. Please try again.
-        </div>
+    <div class="form-errors">
+       <p>Invalid Login</p>
+       <p>Please try again</p>
+    </div>
     {% endif %}
-    {{ form.as_p }}
-    <input type="submit" value="Login">
-</form>
+    
+    <!-- Submit Button -->
+    <input type="submit" value="Login" class="submit-btn" />
+  </form>
+</div>
 {% endblock %}
+
