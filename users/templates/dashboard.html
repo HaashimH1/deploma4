@@ -4,5 +4,40 @@
 
 {% block content %}
 <h1>Welcome, {{ user.username }}!</h1>
-<p>This is your dashboard. Only logged-in users can see this page.</p>
+
+<h2>Your Profiles</h2>
+<ul>
+    {% for profile in profiles %}
+    <li>
+        <strong>{{ profile.job_title }}</strong> in {{ profile.city }}
+        (Full-Time: {{ profile.is_full_time }}, Min Salary: {{ profile.min_salary }})
+        <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="profile_id" value="{{ profile.id }}">
+            <button type="submit" name="delete_profile">Delete</button>
+        </form>
+    </li>
+    {% empty %}
+    <p>No profiles available.</p>
+    {% endfor %}
+</ul>
+
+<h2>Create a New Profile</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="job_title">Job Title:</label>
+    <input type="text" id="job_title" name="job_title" required>
+
+    <label for="min_salary">Minimum Salary:</label>
+    <input type="number" id="min_salary" name="min_salary">
+
+    <label for="is_full_time">Full-Time:</label>
+    <input type="checkbox" id="is_full_time" name="is_full_time">
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required>
+
+    <button type="submit" name="create_profile">Create Profile</button>
+</form>
 {% endblock %}
+

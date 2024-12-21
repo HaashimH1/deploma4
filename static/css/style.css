@@ -126,6 +126,15 @@ footer {
     display: none;
 }
 
+.hero-title-highlight{
+    color: var(--primary);
+    
+}
+
+.hero-description-highlight{
+    color: var(--secondary);
+}
+
 .hero-segment p{
     display: none;
 }
