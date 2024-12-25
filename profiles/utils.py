@@ -9,12 +9,14 @@ def create_profile(user, job_title, min_salary, is_full_time, city):
     """Create a new profile for a user."""
     if Profile.objects.filter(user=user).count() >= 5:
         raise ValidationError("You can only create up to 5 profiles.")
+    make_all_profiles_inactive(user)   # only new profile is active/selected
     return Profile.objects.create(
         user=user,
         job_title=job_title,
         min_salary=min_salary,
         is_full_time=is_full_time,
         city=city,
+        active=True
     )
 
 def edit_profile(profile_id, user, job_title, min_salary, is_full_time, city):
@@ -31,3 +33,27 @@ def delete_profile(profile_id, user):
     """Delete a profile for a user."""
     profile = Profile.objects.get(id=profile_id, user=user)
     profile.delete()
+
+
+def make_all_profiles_inactive(user):
+    """ Makes all profiles for given user active field to false"""
+    profiles = Profile.objects.filter(user=user).update(active=False) # makes all profiles inactive
+
+
+def activate_profile_for_user(user, profile_id):
+    """
+    Activates the specified profile for the given user.
+    
+    :param user: The user who owns the profiles.
+    :param profile_id: The ID of the profile to activate.
+    :raises Profile.DoesNotExist: If the profile ID is invalid or does not belong to the user.
+    """
+
+    # Activate the selected profile
+    try:
+        profile = Profile.objects.get(id=profile_id, user=user)
+        profile.active = True
+        profile.save()
+        return profile  # Return the activated profile
+    except ObjectDoesNotExist:
+        raise Profile.DoesNotExist("The selected profile does not exist.")

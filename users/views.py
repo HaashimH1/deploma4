@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from django.contrib import messages
-from profiles.utils import get_profiles_for_user, create_profile, edit_profile, delete_profile
+from profiles.utils import get_profiles_for_user, create_profile, edit_profile, delete_profile, make_all_profiles_inactive, activate_profile_for_user
 
 # Public Home Page
 def home_view(request):
@@ -59,6 +59,21 @@ def dashboard_view(request):
             messages.success(request, "Profile created successfully!")
         except ValidationError as e:
             messages.error(request, e.message)
+    
+    # Handle activating a profile
+    if request.method == 'POST' and 'activate_profile' in request.POST:
+        profile_id = request.POST.get('profile_id')
+        try:
+
+            # make all proflies inactive
+            make_all_profiles_inactive(request.user)
+
+            # Use utility function to activate the selected profile
+            activated_profile = activate_profile_for_user(request.user, profile_id)
+            messages.success(request, f"Profile '{activated_profile.job_title}' is now active.")
+        except Profile.DoesNotExist:
+            messages.error(request, "The selected profile does not exist.")
+
 
     # Handle editing a profile
     if request.method == 'POST' and 'edit_profile' in request.POST:
@@ -81,3 +96,7 @@ def dashboard_view(request):
         messages.success(request, "Profile deleted successfully!")
 
     return render(request, 'dashboard.html', {'profiles': profiles})
+
+
+
+

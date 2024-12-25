@@ -13,6 +13,7 @@ class Profile(models.Model):
     min_salary = models.PositiveIntegerField(null=True, blank=True)  # Minimum salary (optional)
     is_full_time = models.BooleanField(default=True)  # Full-time or part-time preference
     city = models.CharField(max_length=100)  # City preference
+    active = models.BooleanField(default=True) # selected profile to be displayed/used
 
     def save(self, *args, **kwargs):
         """Enforce the 5-profile limit."""
