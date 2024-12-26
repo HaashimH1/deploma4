@@ -12,7 +12,7 @@
 /* variables to define accent colours */
 :root {
     --primary: #10a37f;
-    --secondary:yellow;
+    --secondary: yellow;
 }
 
 html {
@@ -57,10 +57,7 @@ nav {
     justify-content: space-between;
 }
 
-footer {
-
-    
-}
+footer {}
 
 .nav-left,
 .nav-right {
@@ -109,7 +106,7 @@ footer {
     flex-direction: column;
     padding: 2em 3em;
     width: 100%;
-    
+
 
 }
 
@@ -121,21 +118,21 @@ footer {
 
 }
 
-.hero-segment h1{
+.hero-segment h1 {
     font-size: 5em;
     display: none;
 }
 
-.hero-title-highlight{
+.hero-title-highlight {
     color: var(--primary);
-    
+
 }
 
-.hero-description-highlight{
+.hero-description-highlight {
     color: var(--secondary);
 }
 
-.hero-segment p{
+.hero-segment p {
     display: none;
 }
 
@@ -146,11 +143,11 @@ footer {
 }
 
 .register-container,
-.login-container{
+.login-container {
     display: flex;
     flex-direction: column;
     background-color: #202020;
-    width:fit-content;
+    width: fit-content;
     align-items: center;
     padding: 1em 2em;
     gap: 2em;
@@ -160,7 +157,7 @@ footer {
 
 
 .register-form,
-.login-form{
+.login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,28 +166,28 @@ footer {
 
 }
 
-.text-fields-group-container{
+.text-fields-group-container {
     display: flex;
     flex-direction: column;
     gap: .5em;
 }
 
-.text-fields-container{
+.text-fields-container {
 
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
-   gap: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
 }
 
-.form-errors{
+.form-errors {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.form-errors p{
+.form-errors p {
     color: red;
 }
 
@@ -198,7 +195,7 @@ footer {
     color: white;
 }
 
-.dashboard-container{
+.dashboard-container {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -206,7 +203,7 @@ footer {
     background-color: #101010;
 }
 
-.dashboard-segment{
+.dashboard-segment {
 
     display: flex;
     flex-direction: column;
@@ -216,26 +213,27 @@ footer {
     width: 100%;
 }
 
-.profiles-selection-container{
-    
+.profiles-selection-container {
+
     max-width: 20em;
-    justify-content: flex-start;
+    justify-content: flex-end;
     padding: 1em 1.5em;
     gap: 1em;
-    
+    flex-direction: column-reverse;
+
 }
 
-.profile-container{
+.profile-container {
     display: flex;
     width: 100%;
     height: 4em;
     background-color: #101010;
     justify-content: center;
     align-items: center;
-    
+
 }
 
-.profile-button{
+.profile-button {
 
     width: 100%;
     height: 100%;
@@ -243,41 +241,97 @@ footer {
     border: var(--secondary) solid 1px;
 }
 
-.dashboard-options-container{
+.profile-add-container {
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #202020;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    height: 2em;
 }
 
-.dashboard-content-container{
+.profile-add-container:hover {
+    color: var(--secondary);
+    cursor: pointer;
 
-    background-color: #303030;
 }
 
+.dashboard-options-container {
+
+    max-width: 20em;
+}
+
+.dashboard-content-container {}
 
 
-.create-profile-container{
+
+.create-profile-container {
     display: flex;
     flex-direction: column;
     background-color: #505050;
-    padding:1em 2em;
+    padding: 1em 2em;
     gap: 1em;
+    position: absolute;
     display: none;
+    z-index: 11;
 }
 
-.create-profile-form{
+.create-profile-form {
     display: flex;
     flex-direction: column;
     gap: .75em;
 }
 
 
-.create-profile-fields-container{
+.create-profile-fields-container {
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+
+.background-overlay{
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: .6;
+    display: none;
+}
+
+.pop-up-options-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.exit-popup-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4em;
+    border-radius: 5px;
+    border: red solid 1px;
+    cursor: pointer;
+    background-color: black;
+}
+
+.exit-popup-container:hover{
+    
+    background-color: red;
+    transition: all;
+    transition-duration: .3s;
+}
 
 nav a {
     text-decoration: none;
@@ -295,7 +349,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="submit"]{
+input[type="submit"] {
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;

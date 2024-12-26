@@ -45,7 +45,10 @@ def logout_view(request):
 @login_required
 def dashboard_view(request):
     """Unified dashboard view that includes profile management."""
+
     profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
+    profiles_count = len(profiles) # Get the amount of profiles for the user
+    print(f"there are {profiles_count}, type is {type(profiles_count)}")
 
     # Handle creating a profile
     if request.method == 'POST' and 'create_profile' in request.POST:
@@ -95,7 +98,10 @@ def dashboard_view(request):
         delete_profile(profile_id, request.user)
         messages.success(request, "Profile deleted successfully!")
 
-    return render(request, 'dashboard.html', {'profiles': profiles})
+    return render(request, 'dashboard.html', {
+        'profiles': profiles,
+        "profiles_count": profiles_count
+        })
 
 
 

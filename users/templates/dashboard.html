@@ -3,67 +3,54 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
+
+<div class="background-overlay"></div>
+
+
+
 <div class="dashboard-container">
 
 
     <div class="dashboard-segment profiles-selection-container">
+
+        {% if profiles_count < 5 %}
+        <div class="profile-add-container">
+            +
+        </div>
+        {% endif %}
+
         {% for profile in profiles %}
         <form method="post" class="profile-container">
             {% csrf_token %}
             <input type="hidden" name="profile_id" value="{{ profile.id }}">
-            <button type="submit" name="activate_profile" class="profile-button"
-                    {% if profile.active %}
-                    style="background-color: var(--secondary); color: black;"
-                    {% endif %}
-                    >
+            <button type="submit" name="activate_profile" class="profile-button" {% if profile.active %}
+                style="background-color: var(--secondary); color: black;" {% endif %}>
                 {{ profile.job_title }}
             </button>
         </form>
         {% endfor %}
+
+
+
     </div>
 
-        <div class="dashboard-segment dashboard-options-container">
-         options
+    <div class="dashboard-segment dashboard-options-container">
+        options
 
-        </div>
+    </div>
 
-        <div class="dashboard-segment dashboard-content-container">
-            {% for profile in profiles %}
-            {% if profile.active %}
-    
-            {{ profile.job_title }}
-    
-            {% endif %}
-            {% endfor%}
-
-        </div>
-
-
-
-
-       
-
-    
-
-    <!-- 
-    
-    <ul>
+    <div class="dashboard-segment dashboard-content-container">
         {% for profile in profiles %}
-        <li>
-            <strong>{{ profile.job_title }}</strong> in {{ profile.city }}
-            (Full-Time: {{ profile.is_full_time }}, Min Salary: {{ profile.min_salary }})
-            <form method="post" style="display:inline;">
-                {% csrf_token %}
-                <input type="hidden" name="profile_id" value="{{ profile.id }}">
-                <button type="submit" name="delete_profile">Delete</button>
-            </form>
-        </li>
-        {% empty %}
-        <p>No profiles available.</p>
-        {% endfor %}
-    </ul>
-    
-    -->
+        {% if profile.active %}
+
+        {{ profile.job_title }}
+
+        {% endif %}
+        {% endfor%}
+
+    </div>
+
+
 </div>
 
 <div class="create-profile-container">
@@ -91,8 +78,11 @@
             <input type="text" id="city" name="city" required>
         </div>
 
-        <button type="submit" name="create_profile">Create Profile</button>
+        <div class="pop-up-options-container">
+            <button type="submit" name="create_profile">Create Profile</button>
+            <div class="exit-popup-container">Exit</div>
+        </div>
+
     </form>
 </div>
 {% endblock %}
-

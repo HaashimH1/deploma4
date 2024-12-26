@@ -15,4 +15,16 @@ $(document).ready(function () {
         $(this).removeClass("nav-buttons-hover");
     });
 
+    $('.profile-add-container').on('click', function () {
+        $(".background-overlay").css("display","block");
+        $(".create-profile-container").css("display","flex");
+    });
+
+    $('.exit-popup-container').on('click', function () {
+        $(".background-overlay").css("display","none");
+        $(".create-profile-container").css("display","none");
+    });
+
+
+
 });
