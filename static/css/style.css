@@ -209,17 +209,16 @@ footer {}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: white solid 1px;
     width: 100%;
 }
 
 .profiles-selection-container {
 
     max-width: 20em;
-    justify-content: flex-end;
+    justify-content: flex-start;
     padding: 1em 1.5em;
     gap: 1em;
-    flex-direction: column-reverse;
+    flex-direction: column;
 
 }
 
@@ -238,7 +237,67 @@ footer {}
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    border: var(--secondary) solid 1px;
+    border-color: black;
+}
+
+
+.profile-button:hover{
+    
+    border-color: var(--secondary);
+
+    transition:all;
+    transition-duration: .3s;
+}
+
+
+.edit-delete-profile-container{
+
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    height: 3em;
+    align-items: center;
+
+}
+
+.edit-profile-container,
+.delete-profile-container{
+
+    width: 5em;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    
+}
+
+.edit-profile-container{
+
+    border-color: var(--secondary);
+    
+}
+
+
+.delete-profile-container{
+    border-color: red;
+    
+}
+
+.edit-profile-container:hover{
+    background-color: var(--secondary);
+    color: black;
+    transition: all;
+    transition-duration: 0.3s;
+}
+
+.delete-profile-container:hover{
+    background-color: red;
+    transition: all;
+    transition-duration: 0.3s;
 }
 
 .profile-add-container {
@@ -260,16 +319,12 @@ footer {}
 
 }
 
-.dashboard-options-container {
-
-    max-width: 20em;
-}
-
 .dashboard-content-container {}
 
 
 
-.create-profile-container {
+.create-profile,
+.edit-profile {
     display: flex;
     flex-direction: column;
     background-color: #505050;
@@ -280,20 +335,36 @@ footer {}
     z-index: 11;
 }
 
-.create-profile-form {
+.profile-form {
     display: flex;
     flex-direction: column;
     gap: .75em;
 }
 
 
-.create-profile-fields-container {
+.profile-fields-container {
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.delete-profile-popup-container{
+
+    display: flex;
+    position: absolute;
+    z-index: 11;
+    flex-direction: column;
+    width: 100%;
+    max-width: 20em;
+    height: 10em;
+    background-color: #505050;
+    display: none;
+    justify-content: space-between;
+    padding: 2em 2em;
+    align-items: center;
+
+}
 
 .background-overlay{
     background-color: black;
@@ -311,7 +382,7 @@ footer {}
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .exit-popup-container{
@@ -331,6 +402,15 @@ footer {}
     background-color: red;
     transition: all;
     transition-duration: .3s;
+}
+
+
+.dashboard-divider{
+
+    height: 100%;
+    width: 1px;
+    background-color: black;
+    border-radius: 50%;
 }
 
 nav a {
@@ -374,9 +454,4 @@ button {
     border: var(--primary) solid 2px;
     cursor: pointer;
     width: 10em;
-}
-
-input[type="submit"]:hover,
-button:hover {
-    background-color: var(--primary);
 }

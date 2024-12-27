@@ -17,12 +17,24 @@ $(document).ready(function () {
 
     $('.profile-add-container').on('click', function () {
         $(".background-overlay").css("display","block");
-        $(".create-profile-container").css("display","flex");
+        $(".create-profile").css("display","flex");
     });
 
     $('.exit-popup-container').on('click', function () {
         $(".background-overlay").css("display","none");
-        $(".create-profile-container").css("display","none");
+        $(".create-profile, .edit-profile, .delete-profile-popup-container").css("display","none");
+    });
+
+
+    $('.edit-profile-container').on('click', function () {
+        $(".background-overlay").css("display","block");
+        $(".edit-profile").css("display","flex");
+    });
+
+
+    $('.delete-profile-container').on('click', function () {
+        $(".background-overlay").css("display","block");
+        $(".delete-profile-popup-container").css("display","flex");
     });
 
 

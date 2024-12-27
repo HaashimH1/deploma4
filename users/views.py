@@ -48,7 +48,6 @@ def dashboard_view(request):
 
     profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
     profiles_count = len(profiles) # Get the amount of profiles for the user
-    print(f"there are {profiles_count}, type is {type(profiles_count)}")
 
     # Handle creating a profile
     if request.method == 'POST' and 'create_profile' in request.POST:

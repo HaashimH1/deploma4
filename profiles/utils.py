@@ -5,9 +5,6 @@ def get_profiles_for_user(user):
     """Retrieve all profiles for a given user."""
     return Profile.objects.filter(user=user)
 
-def get_profiles_count(user):
-    return len(Profile.objects.filter(user=user))
-
 def create_profile(user, job_title, min_salary, is_full_time, city):
     """Create a new profile for a user."""
     if Profile.objects.filter(user=user).count() >= 5:

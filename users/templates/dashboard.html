@@ -13,11 +13,7 @@
 
     <div class="dashboard-segment profiles-selection-container">
 
-        {% if profiles_count < 5 %}
-        <div class="profile-add-container">
-            +
-        </div>
-        {% endif %}
+      
 
         {% for profile in profiles %}
         <form method="post" class="profile-container">
@@ -30,14 +26,23 @@
         </form>
         {% endfor %}
 
+        <div class="edit-delete-profile-container">
+            <div class="edit-profile-container">Edit</div>
+            <div class="delete-profile-container">Delete</div>
+        </div>
+
+
+        {% if profiles_count < 5 %}
+        <div class="profile-add-container">
+            +
+        </div>
+        {% endif %}
+
 
 
     </div>
 
-    <div class="dashboard-segment dashboard-options-container">
-        options
-
-    </div>
+    <div class="dashboard-divider"></div>
 
     <div class="dashboard-segment dashboard-content-container">
         {% for profile in profiles %}
@@ -53,27 +58,27 @@
 
 </div>
 
-<div class="create-profile-container">
-    <h2>Create a New Profile</h2>
-    <form method="post" class="create-profile-form">
+<div class="create-profile">
+    <h2>Create A New Profile</h2>
+    <form method="post" class="profile-form">
         {% csrf_token %}
 
-        <div class="create-profile-fields-container">
+        <div class="profile-fields-container">
             <label for="job_title">Job Title:</label>
             <input type="text" id="job_title" name="job_title" required>
         </div>
 
-        <div class="create-profile-fields-container">
+        <div class="profile-fields-container">
             <label for="min_salary">Minimum Salary:</label>
             <input type="number" id="min_salary" name="min_salary">
         </div>
 
-        <div class="create-profile-fields-container">
+        <div class="profile-fields-container">
             <label for="is_full_time">Full-Time:</label>
             <input type="checkbox" id="is_full_time" name="is_full_time">
         </div>
 
-        <div class="create-profile-fields-container">
+        <div class="profile-fields-container">
             <label for="city">City:</label>
             <input type="text" id="city" name="city" required>
         </div>
@@ -85,4 +90,59 @@
 
     </form>
 </div>
+
+{% for profile in profiles %}
+{% if profile.active %}
+<div class="edit-profile">
+    <h2>Edit this Profile</h2>
+    <form method="post" class="profile-form">
+        {% csrf_token %}
+
+        <div class="profile-fields-container">
+            <label for="job_title">Job Title:</label>
+            <input type="text" id="job_title" name="job_title" value="{{profile.job_title}}" required>
+        </div>
+
+        <div class="profile-fields-container">
+            <label for="min_salary">Minimum Salary:</label>
+            <input type="number" id="min_salary" name="min_salary" value="{{profile.min_salary}}" required>
+        </div>
+
+        <div class="profile-fields-container">
+            <label for="is_full_time">Full-Time:</label>
+            <input type="checkbox" id="is_full_time" name="is_full_time" {% if profile.is_full_time %} checked {% endif %}>
+        </div>
+
+        <div class="profile-fields-container">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="{{profile.city}}" required>
+        </div>
+
+        <input type="hidden" name="profile_id" value="{{ profile.id }}">
+
+        <div class="pop-up-options-container">
+            <button type="submit" name="edit_profile">Save</button>
+            <div class="exit-popup-container">Exit</div>
+        </div>
+
+    </form>
+</div>
+
+
+<div class="delete-profile-popup-container">
+
+    <p>Are you sure you want to delete:</p>
+    <p style="color: red;">{{ profile.job_title }}</p>
+    <form method="post" class="pop-up-options-container">
+        {% csrf_token %}
+        <input type="hidden" name="profile_id" value="{{ profile.id }}">
+        <button type="submit" name="delete_profile" class="delete-profile-confirm">Confirm</button>
+        <div class="exit-popup-container">Exit</div>
+    </form>
+
+</div>
+
+{% endif %}
+{% endfor%}
+
 {% endblock %}
