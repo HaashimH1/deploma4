@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from django.contrib import messages
-from profiles.utils import get_profiles_for_user, create_profile, edit_profile, delete_profile, make_all_profiles_inactive, activate_profile_for_user
+from profiles.utils import get_profiles_for_user, create_profile, edit_profile, delete_profile, make_all_profiles_inactive, activate_profile_for_user, get_active_profile_for_user
 
 # Public Home Page
 def home_view(request):
@@ -47,7 +47,7 @@ def dashboard_view(request):
     """Unified dashboard view that includes profile management."""
 
     if request.method == "POST":
-        
+
         # Handle creating a profile
         if 'create_profile' in request.POST:
             job_title = request.POST.get('job_title')
@@ -101,11 +101,13 @@ def dashboard_view(request):
         return redirect("dashboard")
 
     profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
+    active_profile = get_active_profile_for_user(request.user)
     profiles_count = len(profiles) # Get the amount of profiles for the user
 
     return render(request, 'dashboard.html', {
         'profiles': profiles,
-        "profiles_count": profiles_count
+        "profiles_count": profiles_count,
+        "active_profile": active_profile
         })
 
   

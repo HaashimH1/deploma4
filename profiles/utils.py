@@ -5,8 +5,12 @@ def get_profiles_for_user(user):
     """Retrieve all profiles for a given user."""
 
     profiles = Profile.objects.filter(user=user) 
-    check_profiles_inactive(profiles)
+    check_profiles_inactive(profiles)  # makes sure there is 1 active profile
     return profiles
+
+def get_active_profile_for_user(user):
+    """ Retrieves the only active profile for given user """
+    return Profile.objects.get(user=user, active=True)
 
 def create_profile(user, job_title, min_salary, is_full_time, city):
     """Create a new profile for a user."""
@@ -63,8 +67,8 @@ def activate_profile_for_user(user, profile_id):
 
 
 
+
 def check_profiles_inactive(profiles):
-    
     # Check if any profile is active
     if not profiles.filter(active=True).exists():
         # If no profiles are active, make the first profile active

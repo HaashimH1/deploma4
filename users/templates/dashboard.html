@@ -45,13 +45,8 @@
     <div class="dashboard-divider"></div>
 
     <div class="dashboard-segment dashboard-content-container">
-        {% for profile in profiles %}
-        {% if profile.active %}
-
-        {{ profile.job_title }}
-
-        {% endif %}
-        {% endfor%}
+        
+        {{ active_profile.job_title }}
 
     </div>
 
@@ -91,8 +86,7 @@
     </form>
 </div>
 
-{% for profile in profiles %}
-{% if profile.active %}
+
 <div class="edit-profile">
     <h2>Edit this Profile</h2>
     <form method="post" class="profile-form">
@@ -100,25 +94,25 @@
 
         <div class="profile-fields-container">
             <label for="job_title">Job Title:</label>
-            <input type="text" id="job_title" name="job_title" value="{{profile.job_title}}" required>
+            <input type="text" id="job_title" name="job_title" value="{{active_profile.job_title}}" required>
         </div>
 
         <div class="profile-fields-container">
             <label for="min_salary">Minimum Salary:</label>
-            <input type="number" id="min_salary" name="min_salary" value="{{profile.min_salary}}" required>
+            <input type="number" id="min_salary" name="min_salary" value="{{active_profile.min_salary}}" required>
         </div>
 
         <div class="profile-fields-container">
             <label for="is_full_time">Full-Time:</label>
-            <input type="checkbox" id="is_full_time" name="is_full_time" {% if profile.is_full_time %} checked {% endif %}>
+            <input type="checkbox" id="is_full_time" name="is_full_time" {% if active_profile.is_full_time %} checked {% endif %}>
         </div>
 
         <div class="profile-fields-container">
             <label for="city">City:</label>
-            <input type="text" id="city" name="city" value="{{profile.city}}" required>
+            <input type="text" id="city" name="city" value="{{active_profile.city}}" required>
         </div>
 
-        <input type="hidden" name="profile_id" value="{{ profile.id }}">
+        <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
 
         <div class="pop-up-options-container">
             <button type="submit" name="edit_profile">Save</button>
@@ -132,17 +126,15 @@
 <div class="delete-profile-popup-container">
 
     <p>Are you sure you want to delete:</p>
-    <p style="color: red;">{{ profile.job_title }}</p>
+    <p style="color: red;">{{ active_profile.job_title }}</p>
     <form method="post" class="pop-up-options-container">
         {% csrf_token %}
-        <input type="hidden" name="profile_id" value="{{ profile.id }}">
+        <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
         <button type="submit" name="delete_profile" class="delete-profile-confirm">Confirm</button>
         <div class="exit-popup-container">Exit</div>
     </form>
 
 </div>
 
-{% endif %}
-{% endfor%}
 
 {% endblock %}
