@@ -23,3 +23,16 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.job_title} in {self.city} (Full-Time: {self.is_full_time})"
 
+
+
+class JobSearchHistory(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='history')  # Link to Profile
+    job_title = models.CharField(max_length=255)  # Title of the job searched
+    redirect_url = models.URLField()  # URL to the job posting
+    description = models.TextField()  # Description of the job
+    company_name = models.CharField(max_length=255, null=True, blank=True)  # Optional: Company name
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp of when the job search occurred
+
+    def __str__(self):
+        return f"{self.job_title} for {self.profile.user.username} at {self.created_at}"
+

@@ -16,6 +16,9 @@ import dj_database_url
 if os.path.isfile('env.py'):
     import env
 
+ADZUNA_API_KEY = os.getenv('ADZUNA_API_KEY')
+ADZUNA_APP_ID = os.getenv('ADZUNA_APP_ID')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "users",
     "profiles",
+    "api",
 
 ]
 

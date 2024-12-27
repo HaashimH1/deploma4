@@ -26,7 +26,7 @@
         </form>
         {% endfor %}
 
-        <div class="edit-delete-profile-container">
+        <div class="profile-buttons-container">
             <div class="edit-profile-container">Edit</div>
             <div class="delete-profile-container">Delete</div>
         </div>
@@ -38,6 +38,16 @@
         </div>
         {% endif %}
 
+        <h3>Functions</h3>
+
+
+        <div class="profile-buttons-container">
+            <div class="search-option-container selected-option-effect">Search</div>
+            <div class="history-option-container">History</div>
+        </div>
+
+
+
 
 
     </div>
@@ -46,7 +56,27 @@
 
     <div class="dashboard-segment dashboard-content-container">
         
-        {{ active_profile.job_title }}
+        <div class="dashboard-content-display search-content-container">
+           <h2>Search</h1>
+            {% for result in jb%}
+            <p>{{result.title}}</p>
+            <p>{{result.description}}</p>
+            <p>{{result.location.display_name}}</p>
+            <p>{{result.redirect_url}}</p>
+            <p>{{result.company.display_name}}</p>
+            <p>{{result.salary_min}}</p>
+            <p>{{result.salary_max}}</p>
+            {% endfor%}
+
+
+            
+            
+        </div>
+
+        <div class="dashboard-content-display history-content-container">
+            <h2>History</h1>
+            
+        </div>
 
     </div>
 

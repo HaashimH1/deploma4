@@ -37,6 +37,22 @@ $(document).ready(function () {
         $(".delete-profile-popup-container").css("display","flex");
     });
 
+    $('.search-option-container').on('click', function () {
+        $(".history-content-container").css("display","none");
+        $(".search-content-container").css("display","flex");
+
+        $(".history-option-container").removeClass("selected-option-effect");
+        $(".search-option-container").addClass("selected-option-effect");
+    });
+
+    $('.history-option-container').on('click', function () {
+        $(".search-content-container").css("display","none");
+        $(".history-content-container").css("display","flex");
+
+        $(".search-option-container").removeClass("selected-option-effect");
+        $(".history-option-container").addClass("selected-option-effect");
+    });
+
 
 
 });

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from django.contrib import messages
 from profiles.utils import get_profiles_for_user, create_profile, edit_profile, delete_profile, make_all_profiles_inactive, activate_profile_for_user, get_active_profile_for_user
+from api.utils import search_jobs
 
 # Public Home Page
 def home_view(request):
@@ -104,10 +105,20 @@ def dashboard_view(request):
     active_profile = get_active_profile_for_user(request.user)
     profiles_count = len(profiles) # Get the amount of profiles for the user
 
+    job_results = None
+
+    try:
+        # Use the profile to search for jobs
+        job_results = search_jobs(active_profile)
+    except Exception as e:
+        messages.error(request, f"Error fetching jobs: {e}")
+        print(e)
+
     return render(request, 'dashboard.html', {
         'profiles': profiles,
         "profiles_count": profiles_count,
-        "active_profile": active_profile
+        "active_profile": active_profile,
+        "jb": job_results.get("results")
         })
 
   

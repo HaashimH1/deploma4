@@ -251,7 +251,7 @@ footer {}
 }
 
 
-.edit-delete-profile-container{
+.profile-buttons-container{
 
     display: flex;
     width: 100%;
@@ -319,6 +319,37 @@ footer {}
     cursor: pointer;
 
 }
+
+
+.search-option-container,
+.history-option-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 5px;
+    border: black solid 1px;
+    padding: .5em 1em;
+    cursor: pointer;
+}
+
+
+
+.selected-option-effect{
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+
+.search-option-container:hover,
+.history-option-container:hover
+{
+    border-color: var(--primary);
+    transition: all;
+    transition-duration: .3s;
+}
+
+
 
 .dashboard-content-container {}
 
@@ -413,6 +444,31 @@ footer {}
     background-color: black;
     border-radius: 50%;
 }
+
+
+.dashboard-content-display{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+}
+
+
+.search-content-container{
+
+
+}
+
+.history-content-container{
+
+    display: none;
+
+}
+
 
 nav a {
     text-decoration: none;
