@@ -3,7 +3,10 @@ from django.core.exceptions import ValidationError
 
 def get_profiles_for_user(user):
     """Retrieve all profiles for a given user."""
-    return Profile.objects.filter(user=user)
+
+    profiles = Profile.objects.filter(user=user) 
+    check_profiles_inactive(profiles)
+    return profiles
 
 def create_profile(user, job_title, min_salary, is_full_time, city):
     """Create a new profile for a user."""
@@ -57,5 +60,17 @@ def activate_profile_for_user(user, profile_id):
         return profile  # Return the activated profile
     except ObjectDoesNotExist:
         raise Profile.DoesNotExist("The selected profile does not exist.")
+
+
+
+def check_profiles_inactive(profiles):
+    
+    # Check if any profile is active
+    if not profiles.filter(active=True).exists():
+        # If no profiles are active, make the first profile active
+        first_profile = profiles.first()  # Get the first profile in the queryset
+        if first_profile:
+            first_profile.active = True
+            first_profile.save()
 
 
