@@ -455,6 +455,7 @@ footer {}
     justify-content: flex-start;
     align-items: center;
     padding: 1em;
+    gap: 1em;
 }
 
 
@@ -467,6 +468,42 @@ footer {}
 
     display: none;
 
+}
+
+.search-result-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: black;
+    padding: 1em;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
+.result-content-1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+.result-content-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.result-content-3{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
 }
 
 

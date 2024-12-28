@@ -31,6 +31,9 @@ class JobSearchHistory(models.Model):
     redirect_url = models.URLField()  # URL to the job posting
     description = models.TextField()  # Description of the job
     company_name = models.CharField(max_length=255, null=True, blank=True)  # Optional: Company name
+    location = models.CharField(max_length=255, default="N/A")
+    salary_min = models.PositiveIntegerField(null=True, blank=True)
+    salary_max = models.PositiveIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)  # Timestamp of when the job search occurred
 
     def __str__(self):

@@ -77,20 +77,3 @@ def check_profiles_inactive(profiles):
             first_profile.active = True
             first_profile.save()
 
-
-# Adding a job search entry
-def add_job_search_entry(profile_id, job_title, redirect_url, description, company_name=None):
-    profile = Profile.objects.get(id=profile_id)  # Fetch the Profile object
-    return JobSearchHistory.objects.create(
-        profile=profile,
-        job_title=job_title,
-        redirect_url=redirect_url,
-        description=description,
-        company_name=company_name
-    )
-
-def get_profile_history(profile_id):
-    profile = Profile.objects.get(id=profile_id)
-    return profile.history.all()  # Fetch all history entries for the profile
-
-

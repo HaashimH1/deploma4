@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from django.contrib import messages
 from profiles.utils import get_profiles_for_user, create_profile, edit_profile, delete_profile, make_all_profiles_inactive, activate_profile_for_user, get_active_profile_for_user
-from api.utils import search_jobs
+from api.utils import search_jobs,add_job_search_entry, get_profile_history
 
 # Public Home Page
 def home_view(request):
@@ -104,21 +104,32 @@ def dashboard_view(request):
     profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
     active_profile = get_active_profile_for_user(request.user)
     profiles_count = len(profiles) # Get the amount of profiles for the user
+    profiles_history = get_profile_history(active_profile.id)
+
+    print(profiles_history)
 
     job_results = None
 
     try:
         # Use the profile to search for jobs
-        job_results = search_jobs(active_profile)
+        full_json_job_results = search_jobs(active_profile)
+        job_results = full_json_job_results.get("results")
     except Exception as e:
         messages.error(request, f"Error fetching jobs: {e}")
         print(e)
+
+    for result in job_results:
+        add_job_search_entry(active_profile.id, result.get("title"), result.get("redirect_url"), result.get("description"), 
+        result.get("company").get("display_name"), result.get("location").get("display_name"), 
+        result.get("salary_min"), result.get("salary_max"))
+
 
     return render(request, 'dashboard.html', {
         'profiles': profiles,
         "profiles_count": profiles_count,
         "active_profile": active_profile,
-        "jb": job_results.get("results")
+        "profiles_history":profiles_history,
+        "jb": job_results
         })
 
   

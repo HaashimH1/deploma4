@@ -59,13 +59,24 @@
         <div class="dashboard-content-display search-content-container">
            <h2>Search</h1>
             {% for result in jb%}
-            <p>{{result.title}}</p>
-            <p>{{result.description}}</p>
-            <p>{{result.location.display_name}}</p>
-            <p>{{result.redirect_url}}</p>
-            <p>{{result.company.display_name}}</p>
-            <p>{{result.salary_min}}</p>
-            <p>{{result.salary_max}}</p>
+
+            <div class="search-result-container" data-link="{{result.redirect_url}}">
+                <div class="result-content-1">
+                    <p>{{result.title}}</p>
+                    <p>|</p>
+                    <p>{{result.company.display_name}}</p>
+
+                </div>
+                <div class="result-content-2">
+                    <p>{{result.location.display_name}}</p>
+                    <p>{{result.description}}</p>
+                </div>
+                <div class="result-content3">
+                    <p>Salary range of {{result.salary_min}} to {{result.salary_max}} </p>
+                </div>
+            </div>
+            
+            
             {% endfor%}
 
 
@@ -75,6 +86,29 @@
 
         <div class="dashboard-content-display history-content-container">
             <h2>History</h1>
+
+                {% for result in profiles_history %}
+
+                <div class="search-result-container" data-link="{{result.redirect_url}}">
+                    <div class="result-content-1">
+                        <p>{{result.job_title}}</p>
+                        <p>|</p>
+                        <p>{{result.company_name}}</p>
+    
+                    </div>
+                    <div class="result-content-2">
+                        <p>{{result.location}}</p>
+                        <p>{{result.description}}</p>
+                    </div>
+                    <div class="result-content3">
+                        <p>Salary range of {{result.salary_min}} to {{result.salary_max}} </p>
+                    </div>
+                </div>
+                
+                
+                {% endfor%}
+
+             
             
         </div>
 

@@ -54,5 +54,9 @@ $(document).ready(function () {
     });
 
 
+    $('.search-result-container').on('click', function () {
+        window.open($(this).data('link'), '_blank');
+    });
+
 
 });
