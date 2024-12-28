@@ -1,16 +1,51 @@
 {% extends 'base.html' %} 
+{% load static %}
 
 {% block title %}Home{% endblock %} 
 
 {% block content%}
 
 <div class="main-segments hero-segment">
-<h1><span class="hero-title-highlight">Pattern</span> Jobs</h1>
-<p>Level up your <span class="hero-description-highlight">Job Search</span>, using this powerful tool</p>
-
+    <h1><span class="hero-title-highlight">Pattern</span> Jobs</h1>
+    <p>Level up your <span class="hero-description-highlight">Job Search</span>, using this powerful tool</p>
 </div>
 <div class="main-segments info-segment">
 
-information b
+    <div class="info-card-groups">
+        <div class="info-card-container">
+            <img src="{% static 'images/placeholder_logo.png' %}" class="info-card-image" />
+            <div class="info-card-description">
+                Get job recommendations tailored to your preferences. Set your job title, location, and salary expectations, and let us do the searching for you!
+            </div>
+        </div>
+
+        <div class="info-card-container">
+            <img src="{% static 'images/placeholder_logo.png' %}" class="info-card-image" />
+            <div class="info-card-description">
+                Keep track of all your job searches with our intuitive history feature, ensuring you never lose sight of potential opportunities.
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="info-card-groups">
+        <div class="info-card-container">
+            <img src="{% static 'images/placeholder_logo.png' %}" class="info-card-image" />
+            <div class="info-card-description">
+                Manage multiple profiles and access job listings effortlessly through our user-friendly dashboard.
+            </div>
+        </div>
+
+        <div class="info-card-container">
+            <img src="{% static 'images/placeholder_logo.png' %}" class="info-card-image" />
+            <div class="info-card-description">
+                Explore opportunities worldwide with our comprehensive job search powered by leading job listing APIs.
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
 {% endblock %}
