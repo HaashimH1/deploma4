@@ -81,7 +81,6 @@
 
             <form method="POST">
                 {% csrf_token %}
-                <input type="hidden" name="profile_id" value="{{ profile.id }}">
                 <button type="submit" name="search_jobs" class="profile-button">
                     Click to get some jobs !
                 </button>
@@ -97,7 +96,6 @@
 
         <div class="dashboard-content-display history-content-container">
             
-
                 {% for result in profiles_history %}
 
                 <div class="search-result-container" data-link="{{result.redirect_url}}">
