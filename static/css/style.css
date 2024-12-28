@@ -27,6 +27,7 @@ body {
     background-color: black;
     color: white;
     font-family: "Nunito";
+    max-width: 100vw;
 }
 
 header {
@@ -124,6 +125,7 @@ footer {
 
 .hero-segment h1 {
     font-size: min(11vw, 8em);
+    display: none;
 }
 
 .hero-title-highlight {
@@ -254,10 +256,13 @@ footer {
 
 .dashboard-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    height: 80vh;
-    background-color: #101010;
+    background-color: #171717;
+    max-width: 34em;
+    height: 100%;
+    align-items: center;
+    border-radius: 5px;
 }
 
 .dashboard-segment {
@@ -271,8 +276,8 @@ footer {
 
 .profiles-selection-container {
 
-    max-width: 20em;
-    min-width: 17em;
+    width: 100%;
+    max-width: 25em;
     justify-content: flex-start;
     padding: 1em 1.5em;
     gap: 1em;
@@ -295,7 +300,11 @@ footer {
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    background-color: black;
+    color: white;
+    border: black solid 1px;
     border-color: black;
+    cursor: pointer;
 }
 
 
@@ -330,8 +339,12 @@ footer {
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
+    background-color: black;
     
 }
+
+
+
 
 .edit-profile-container{
 
@@ -421,9 +434,34 @@ footer {
     background-color: #505050;
     padding: 1em 2em;
     gap: 1em;
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
     z-index: 11;
     display: none;
+    width: 95%;
+    max-width: 25em;
+    border-radius: 10px;
+}
+
+.edit-profile-button,
+.create-profile-button{
+
+    background-color: black;
+    padding: 0.5em 1em;
+    color: white;
+    border-radius: 5px;
+    border: black solid 1px;
+    cursor: pointer;
+}
+
+.edit-profile-button:hover,
+.create-profile-button:hover{
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transition: all;
+    transition-duration: .3s;
 }
 
 .profile-form {
@@ -443,18 +481,39 @@ footer {
 .delete-profile-popup-container{
 
     display: flex;
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
     z-index: 11;
     flex-direction: column;
-    width: 100%;
-    max-width: 20em;
-    height: 10em;
+    width: 95%;
+    max-width: 25em;
+    height: 15em;
     background-color: #505050;
     display: none;
     justify-content: space-between;
     padding: 2em 2em;
     align-items: center;
+    border-radius: 10px;
 
+}
+
+.delete-profile-confirm{
+    background-color: darkred;
+    color: white;
+    padding: .5em .75em;
+    border-radius: 5px;
+    border: red solid 1px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.delete-profile-confirm:hover{
+    background-color: red;
+    color: black;
+    transition: all;
+    transition-duration: .3s;
 }
 
 .background-overlay{
@@ -469,11 +528,17 @@ footer {
     display: none;
 }
 
+
+.no-scroll{
+    overflow: hidden;
+}
+
 .pop-up-options-container{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    width: 100%;
 }
 
 .exit-popup-container{
@@ -481,7 +546,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4em;
+    padding: 5px 1em;
     border-radius: 5px;
     border: red solid 1px;
     cursor: pointer;
@@ -491,6 +556,7 @@ footer {
 .exit-popup-container:hover{
     
     background-color: red;
+    color: black;
     transition: all;
     transition-duration: .3s;
 }
@@ -498,8 +564,8 @@ footer {
 
 .dashboard-divider{
 
-    height: 100%;
-    width: 1px;
+    width: 100%;
+    height: 1px;
     background-color: black;
     border-radius: 50%;
 }
@@ -515,14 +581,10 @@ footer {
     align-items: center;
     padding: 1em;
     gap: 1em;
-    overflow-y: scroll;
-    pointer-events: auto;
 }
 
 .history-content-container{
-
     display: none;
-
 }
 
 .search-result-container{
@@ -543,6 +605,7 @@ footer {
     align-items: center;
     justify-content: flex-start;
     gap: 1em;
+    font-weight: 500;
 }
 
 .result-content-2{
@@ -551,6 +614,7 @@ footer {
     justify-content: center;
     align-items: flex-start;
     gap: 3px;
+    color: #D0D0D0;
 }
 
 .result-content-3{
@@ -561,6 +625,41 @@ footer {
     gap: 1em;
 }
 
+.job-search-button-container{
+    width: 60%;
+    max-width: 20em;
+    height: 3.5em;
+}
+
+.job-search-button{
+   width: 100%;
+   height: 100%;
+   background-color: black;
+   color: var(--primary);
+   font-weight: 600;
+   font-size: 1.5em;
+   border: var(--primary) solid 1px;
+   cursor: pointer;
+   border-radius: 10px;
+
+}
+
+.job-search-button:hover{
+    background-color: var(--primary);
+    color: black;
+    transition: all;
+    transition-duration: .3s;
+}
+
+.highlight-job-title{
+   color: var(--primary);
+   font-weight: 600;
+}
+
+.highlight-salary{
+    color: var(--secondary);
+    font-weight: 550;
+}
 
 nav a {
     text-decoration: none;
@@ -595,6 +694,20 @@ input[type="password"]:focus {
 }
 
 
+@media screen and (min-width:500px) {
+
+    .info-card-container{
+        flex-direction: row;
+        justify-content: flex-start;
+        max-width: 75em;
+    }
+
+    .info-card-container:nth-child(2){
+        flex-direction: row-reverse;
+    }
+
+}
+
 
 /* Media query - tablets and larger (768px) */
 
@@ -607,19 +720,35 @@ input[type="password"]:focus {
     .nav-left{
         gap: .75em;
     }
-
-    .info-card-container{
-        flex-direction: row;
-        justify-content: flex-start;
-        max-width: 75em;
-    }
-
-    .info-card-container:nth-child(2){
-        flex-direction: row-reverse;
-    }
-
     .info-card-image{
         width: 6em;
+    }
+
+    .dashboard-container{
+
+        flex-direction: row;
+        max-width: 100%;
+        height: 85vh;
+        align-items: flex-start;
+    }
+
+    .dashboard-content-display{
+
+        overflow-y: scroll;
+        pointer-events: auto;
+        height: 80vh;
+       
+    }
+
+    .job-search-button{
+
+        padding: .5em 0;
+    
+    }
+
+    .dashboard-divider{
+        height: 100%;
+        width: 1px;
     }
 
 }

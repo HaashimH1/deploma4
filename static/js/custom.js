@@ -17,23 +17,27 @@ $(document).ready(function () {
 
     $('.profile-add-container').on('click', function () {
         $(".background-overlay").css("display","block");
+        $("body").addClass("no-scroll");
         $(".create-profile").css("display","flex");
     });
 
     $('.exit-popup-container').on('click', function () {
         $(".background-overlay").css("display","none");
+        $("body").removeClass("no-scroll");
         $(".create-profile, .edit-profile, .delete-profile-popup-container").css("display","none");
     });
 
 
     $('.edit-profile-container').on('click', function () {
         $(".background-overlay").css("display","block");
+        $("body").addClass("no-scroll");
         $(".edit-profile").css("display","flex");
     });
 
 
     $('.delete-profile-container').on('click', function () {
         $(".background-overlay").css("display","block");
+        $("body").addClass("no-scroll");
         $(".delete-profile-popup-container").css("display","flex");
     });
 

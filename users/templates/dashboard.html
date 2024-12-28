@@ -30,25 +30,19 @@
         </div>
         {% endif %}
 
-
         {% if profiles_count < 5 %}
         <div class="profile-add-container">
             +
         </div>
         {% endif %}
-
         
         {% if active_profile %}
         <h3>Functions</h3>
         <div class="profile-buttons-container">
-            <div class="search-option-container selected-option-effect">Search</div>
+            <div class="search-option-container selected-option-effect">Jobs</div>
             <div class="history-option-container">History</div>
         </div>
         {% endif %}
-
-
-
-
 
     </div>
 
@@ -58,36 +52,42 @@
         
         <div class="dashboard-content-display search-content-container">
 
-            {% if active_profile %}
-            <form method="POST">
-                {% csrf_token %}
-                <button type="submit" name="search_jobs" class="profile-button">
-                    Click to get some jobs !
-                </button>
+            
+           
 
+            {% if job_results%}
+            {% for result in job_results%}
+            <div class="search-result-container" data-link="{{result.redirect_url}}">
+                <div class="result-content-1">
+                    <p><span class="highlight-job-title">{{result.title}}</span> | {{result.company.display_name}}  | {{result.location.display_name}}</p>
+                </div>
+                <div class="result-content-2">
+                    {{result.description}}
+                </div>
+                <div class="result-content3">
+                    <p>Salary range of <span class="highlight-salary">{{result.salary_min}}</span> to 
+                        <span class="highlight-salary">{{result.salary_max}}</span></p>
+                </div>
+            </div>
+            {% endfor%}
+            {% else %}
+            <p>Make sure:</p>
+            <ul>
+                <li>City is spelt correctly and in UK</li>
+                <li>Job Title is spelt correctly</li>
+                <li>Valid salary amount</li>
+            </ul>
+            <p>If no jobs are displaying, then the above need to checked</p>
+            {% endif %}
+
+            {% if active_profile %}
+            <form method="POST" class="job-search-button-container">
+                {% csrf_token %}
+                <button type="submit" name="search_jobs" class="job-search-button">Search</button>
             </form>
             {% else %}
             <h2>Must Create at least 1 Profile</h2>
             {% endif %}
-           
-            {% for result in job_results%}
-
-            <div class="search-result-container" data-link="{{result.redirect_url}}">
-                <div class="result-content-1">
-                    <p>{{result.title}}</p>
-                    <p>|</p>
-                    <p>{{result.company.display_name}}</p>
-
-                </div>
-                <div class="result-content-2">
-                    <p>{{result.location.display_name}}</p>
-                    <p>{{result.description}}</p>
-                </div>
-                <div class="result-content3">
-                    <p>Salary range of {{result.salary_min}} to {{result.salary_max}} </p>
-                </div>
-            </div>
-            {% endfor%}
   
         </div>
 
@@ -99,36 +99,27 @@
 
                 <div class="search-result-container" data-link="{{result.redirect_url}}">
                     <div class="result-content-1">
-                        <p>{{result.job_title}}</p>
-                        <p>|</p>
-                        <p>{{result.company_name}}</p>
-    
+                        <p><span class="highlight-job-title">{{result.job_title}}</span> | {{result.company_name}}  | {{result.location}}</p>
                     </div>
                     <div class="result-content-2">
-                        <p>{{result.location}}</p>
-                        <p>{{result.description}}</p>
+                        {{result.description}}
                     </div>
                     <div class="result-content3">
-                        <p>Salary range of {{result.salary_min}} to {{result.salary_max}} </p>
+                        <p>Salary range of <span class="highlight-salary">{{result.salary_min}}</span> to <span
+                                class="highlight-salary">{{result.salary_max}}</span></p>
                     </div>
                 </div>
                 
                 
                 {% endfor%}
 
-                
-
-             
-            
         </div>
-
     </div>
-
-
 </div>
 
+
 <div class="create-profile">
-    <h2>Create A New Profile</h2>
+    <h2>New Profile</h2>
     <form method="post" class="profile-form">
         {% csrf_token %}
 
@@ -153,7 +144,7 @@
         </div>
 
         <div class="pop-up-options-container">
-            <button type="submit" name="create_profile">Create Profile</button>
+            <button type="submit" name="create_profile" class="create-profile-button">Create</button>
             <div class="exit-popup-container">Exit</div>
         </div>
 
@@ -162,7 +153,7 @@
 
 
 <div class="edit-profile">
-    <h2>Edit this Profile</h2>
+    <h2>Edit Profile</h2>
     <form method="post" class="profile-form">
         {% csrf_token %}
 
@@ -189,7 +180,7 @@
         <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
 
         <div class="pop-up-options-container">
-            <button type="submit" name="edit_profile">Save</button>
+            <button type="submit" name="edit_profile" class="edit-profile-button">Save</button>
             <div class="exit-popup-container">Exit</div>
         </div>
 
@@ -200,12 +191,12 @@
 <div class="delete-profile-popup-container">
 
     {% if profiles_count > 1 %}
-    <p>Are you sure you want to delete:</p>
-    <p style="color: red;">{{ active_profile.job_title }}</p>
+    <p>Are you sure you want to <span style="color: red;">DELETE</span></p>
+    <p>{{ active_profile.job_title }}</p>
     <form method="post" class="pop-up-options-container">
         {% csrf_token %}
         <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
-        <button type="submit" name="delete_profile" class="delete-profile-confirm">Confirm</button>
+        <button type="submit" name="delete_profile" class="delete-profile-confirm">DELETE PERMANENTLY</button>
         <div class="exit-popup-container">Exit</div>
     </form>
 
