@@ -184,7 +184,8 @@ footer {
     display: flex;
     flex-direction: column;
     background-color: #202020;
-    width: fit-content;
+    width: 100%;
+    max-width: 22em;
     align-items: center;
     padding: 1em 2em;
     gap: 2em;
@@ -230,6 +231,25 @@ footer {
 
 .form-errors li {
     color: white;
+}
+
+.login-register-button{
+
+    background-color: #0A0A0A;
+    border: var(--primary) solid 1px;
+    color: white;
+    padding: .5em 1em;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+.login-register-button:hover{
+
+    background-color: var(--primary);
+    color: black;
+
+    transition: all;
+    transition-duration: .3s;
 }
 
 .dashboard-container {
@@ -557,11 +577,9 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"],
-input[type="submit"] {
+input[type="password"]{
     padding: 10px;
     border-radius: 5px;
-    font-size: 16px;
     background-color: black;
     border: 1px solid white;
     color: white;
@@ -574,15 +592,6 @@ input[type="password"]:focus {
     border-color: var(--secondary);
     border-width: 2px;
     outline: none;
-}
-
-input[type="submit"],
-button {
-    background-color: black;
-    color: white;
-    border: var(--primary) solid 2px;
-    cursor: pointer;
-    width: 10em;
 }
 
 
