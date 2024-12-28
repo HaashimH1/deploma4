@@ -152,3 +152,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",  # Tell Django to look for static files in the 'static' folder at the project root
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
