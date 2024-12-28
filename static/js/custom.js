@@ -58,5 +58,8 @@ $(document).ready(function () {
         window.open($(this).data('link'), '_blank');
     });
 
+    $('.dashboard-content-display').scrollTop(0); // Set scroll position to the top
+    
+
 
 });

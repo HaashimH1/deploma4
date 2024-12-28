@@ -57,6 +57,14 @@
     <div class="dashboard-segment dashboard-content-container">
         
         <div class="dashboard-content-display search-content-container">
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="search_jobs" class="profile-button">
+                    Click to get some jobs !
+                </button>
+
+            </form>
            
             {% for result in job_results%}
 
@@ -75,19 +83,13 @@
                     <p>Salary range of {{result.salary_min}} to {{result.salary_max}} </p>
                 </div>
             </div>
+
+            
             
             
             {% endfor%}
 
-            <form method="POST">
-                {% csrf_token %}
-                <button type="submit" name="search_jobs" class="profile-button">
-                    Click to get some jobs !
-                </button>
-
-            </form>
-
-            <h2>Search</h1>
+            
 
 
             
@@ -95,6 +97,8 @@
         </div>
 
         <div class="dashboard-content-display history-content-container">
+
+            <h2>History</h1>
             
                 {% for result in profiles_history %}
 
@@ -117,7 +121,7 @@
                 
                 {% endfor%}
 
-                <h2>History</h1>
+                
 
              
             

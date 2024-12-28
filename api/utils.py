@@ -41,7 +41,7 @@ def job_search_exists(profile_id, description):
 
 def get_profile_history(profile_id):
     profile = Profile.objects.get(id=profile_id)
-    return profile.history.all()  # Fetch all history entries for the profile
+    return profile.history.all().order_by("-id")  # Fetch all history entries for the profile, reverse to get histroy new to old
 
 
 
