@@ -16,7 +16,7 @@
 }
 
 html {
-    font-size: 100%;
+    font-size: 16px;
     /* Sets the base font size to 16px */
 }
 
@@ -34,7 +34,7 @@ header {
     color: white;
     width: 100%;
     height: 4em;
-    padding: 0 2em;
+    padding: 0 1em;
 }
 
 main {
@@ -57,7 +57,13 @@ nav {
     justify-content: space-between;
 }
 
-footer {}
+footer {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
 
 .nav-left,
 .nav-right {
@@ -68,12 +74,12 @@ footer {}
 }
 
 .nav-left {
-    gap: 1em;
+    gap: 5px;
     cursor: pointer;
 }
 
 .nav-right {
-    gap: 3em;
+    gap: 1em;
 }
 
 .nav-logo {
@@ -87,7 +93,7 @@ footer {}
 }
 
 .nav-button {
-    padding: .5em 1em;
+    padding: .5em .75em;
     border-radius: 10px;
     background-color: #202020;
 
@@ -106,8 +112,6 @@ footer {}
     flex-direction: column;
     padding: 2em 3em;
     width: 100%;
-
-
 }
 
 .hero-segment {
@@ -119,8 +123,7 @@ footer {}
 }
 
 .hero-segment h1 {
-    font-size: 5em;
-    display: none;
+    font-size: min(11vw, 8em);
 }
 
 .hero-title-highlight {
@@ -138,14 +141,14 @@ footer {}
 
 .info-segment {
     background-color: #101010;
-    height: 40em;
+    height: 100%;
     border-radius: 3px;
     display: flex;
     flex-direction: column;
     padding: 2em 2em;
-
     justify-content: center;
     align-items: space-between;
+    gap: 2em;
 }
 
 .info-card-groups{
@@ -155,6 +158,7 @@ footer {}
     height: 100%;
     justify-content: center;
     align-items: center;
+    gap: 2em;
 }
 
 .info-card-description{
@@ -166,13 +170,13 @@ footer {}
 }
 
 .info-card-container{
-
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
+    gap: 1em;
 }
 
 .register-container,
@@ -495,12 +499,6 @@ footer {}
     pointer-events: auto;
 }
 
-
-.search-content-container{
-
-
-}
-
 .history-content-container{
 
     display: none;
@@ -585,4 +583,34 @@ button {
     border: var(--primary) solid 2px;
     cursor: pointer;
     width: 10em;
+}
+
+
+
+/* Media query - tablets and larger (768px) */
+
+@media screen and (min-width:768px) {
+
+    header{
+        padding: 0 2em;
+    }
+
+    .nav-left{
+        gap: .75em;
+    }
+
+    .info-card-container{
+        flex-direction: row;
+        justify-content: flex-start;
+        max-width: 75em;
+    }
+
+    .info-card-container:nth-child(2){
+        flex-direction: row-reverse;
+    }
+
+    .info-card-image{
+        width: 6em;
+    }
+
 }
