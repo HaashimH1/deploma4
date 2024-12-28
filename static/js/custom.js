@@ -58,8 +58,15 @@ $(document).ready(function () {
         window.open($(this).data('link'), '_blank');
     });
 
-    $('.dashboard-content-display').scrollTop(0); // Set scroll position to the top
-    
 
+    // forces create profile popup if there are no profiles
+    profile_count = $(".profile-container").length;
+    if (profile_count == 0){
+        $(".background-overlay").css("display","block");
+        $(".create-profile").css("display","flex");
+    }
+        
+
+    
 
 });

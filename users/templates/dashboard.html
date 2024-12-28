@@ -13,8 +13,6 @@
 
     <div class="dashboard-segment profiles-selection-container">
 
-      
-
         {% for profile in profiles %}
         <form method="post" class="profile-container">
             {% csrf_token %}
@@ -69,6 +67,8 @@
                 </button>
 
             </form>
+            {% else %}
+            <h2>Must Create at least 1 Profile</h2>
             {% endif %}
            
             {% for result in job_results%}
