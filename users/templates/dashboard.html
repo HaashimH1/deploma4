@@ -10,7 +10,6 @@
 
 <div class="dashboard-container">
 
-
     <div class="dashboard-segment profiles-selection-container">
 
         {% for profile in profiles %}
@@ -209,6 +208,7 @@
 
 <div class="delete-profile-popup-container">
 
+    {% if profiles_count > 1 %}
     <p>Are you sure you want to delete:</p>
     <p style="color: red;">{{ active_profile.job_title }}</p>
     <form method="post" class="pop-up-options-container">
@@ -217,6 +217,12 @@
         <button type="submit" name="delete_profile" class="delete-profile-confirm">Confirm</button>
         <div class="exit-popup-container">Exit</div>
     </form>
+
+    {% else %}
+    <p>Cannot delete this profile as its your only profile</p>
+    <p>Edit this profile, or make a new profile</p>
+    <div class="exit-popup-container">Exit</div>
+    {% endif %}
 
 </div>
 
