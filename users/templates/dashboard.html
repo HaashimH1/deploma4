@@ -26,10 +26,12 @@
         </form>
         {% endfor %}
 
+        {% if active_profile %}
         <div class="profile-buttons-container">
             <div class="edit-profile-container">Edit</div>
             <div class="delete-profile-container">Delete</div>
         </div>
+        {% endif %}
 
 
         {% if profiles_count < 5 %}
@@ -38,13 +40,14 @@
         </div>
         {% endif %}
 
+        
+        {% if active_profile %}
         <h3>Functions</h3>
-
-
         <div class="profile-buttons-container">
             <div class="search-option-container selected-option-effect">Search</div>
             <div class="history-option-container">History</div>
         </div>
+        {% endif %}
 
 
 
@@ -58,6 +61,7 @@
         
         <div class="dashboard-content-display search-content-container">
 
+            {% if active_profile %}
             <form method="POST">
                 {% csrf_token %}
                 <button type="submit" name="search_jobs" class="profile-button">
@@ -65,6 +69,7 @@
                 </button>
 
             </form>
+            {% endif %}
            
             {% for result in job_results%}
 

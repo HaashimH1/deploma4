@@ -10,7 +10,10 @@ def get_profiles_for_user(user):
 
 def get_active_profile_for_user(user):
     """ Retrieves the only active profile for given user """
-    return Profile.objects.get(user=user, active=True)
+    try:
+        return Profile.objects.get(user=user, active=True)
+    except:
+        return None  # No profiles created in user
 
 def create_profile(user, job_title, min_salary, is_full_time, city):
     """Create a new profile for a user."""

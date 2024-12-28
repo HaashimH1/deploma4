@@ -4,8 +4,8 @@ from django.core.exceptions import ValidationError
 
 # Validation function to enforce the 5-profile limit
 def validate_profile_limit(user):
-    if Profile.objects.filter(user=user).count() >= 5:
-        raise ValidationError("You can only create up to 5 profiles.")
+    if Profile.objects.filter(user=user).count() > 5:
+        raise ValidationError("You can only create up to 5 profiles")
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profiles')  # Link to User

@@ -50,7 +50,10 @@ def dashboard_view(request):
     profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
     active_profile = get_active_profile_for_user(request.user)
     profiles_count = len(profiles) # Get the amount of profiles for the user
-    profiles_history = get_profile_history(active_profile.id)
+    profiles_history = None
+    if active_profile:
+        profiles_history = get_profile_history(active_profile.id)
+
     job_results = None
 
     if request.method == "POST":
@@ -108,15 +111,13 @@ def dashboard_view(request):
                 # Use the profile to search for jobs
                 full_json_job_results = search_jobs(active_profile)
                 job_results = full_json_job_results.get("results")
+                for result in job_results:
+                    add_job_search_entry(active_profile.id, result.get("title"), result.get("redirect_url"), result.get("description"), 
+                    result.get("company").get("display_name"), result.get("location").get("display_name"), 
+                    result.get("salary_min"), result.get("salary_max"))
             except Exception as e:
                 messages.error(request, f"Error fetching jobs: {e}")
                 print(e)
-
-            for result in job_results:
-                add_job_search_entry(active_profile.id, result.get("title"), result.get("redirect_url"), result.get("description"), 
-                result.get("company").get("display_name"), result.get("location").get("display_name"), 
-                result.get("salary_min"), result.get("salary_max"))
-
 
         
         # After handling the POST request, redirect to reload the page
