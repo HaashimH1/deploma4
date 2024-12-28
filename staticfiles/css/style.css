@@ -1,0 +1,754 @@
+/* GOOGLE FONTS IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* wildcard selectoe to reset all browser default style rules */
+* {
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* variables to define accent colours */
+:root {
+    --primary: #10a37f;
+    --secondary: yellow;
+}
+
+html {
+    font-size: 16px;
+    /* Sets the base font size to 16px */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: "Nunito";
+    max-width: 100vw;
+}
+
+header {
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 4em;
+    padding: 0 1em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: .25em 1em;
+    padding-bottom: 1em;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+
+}
+
+nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+}
+
+.nav-left {
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nav-right {
+    gap: 1em;
+}
+
+.nav-logo {
+    height: 3.5em;
+}
+
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-button {
+    padding: .5em .75em;
+    border-radius: 10px;
+    background-color: #202020;
+
+}
+
+.nav-buttons-hover {
+
+    background-color: var(--primary);
+
+    transition: all;
+    transition-duration: 0.3s;
+}
+
+.main-segments {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 3em;
+    width: 100%;
+}
+
+.hero-segment {
+    background-color: black;
+    height: 20em;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.hero-segment h1 {
+    font-size: min(11vw, 8em);
+    display: none;
+}
+
+.hero-title-highlight {
+    color: var(--primary);
+
+}
+
+.hero-description-highlight {
+    color: var(--secondary);
+}
+
+.hero-segment p {
+    display: none;
+}
+
+.info-segment {
+    background-color: #101010;
+    height: 100%;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    padding: 2em 2em;
+    justify-content: center;
+    align-items: space-between;
+    gap: 2em;
+}
+
+.info-card-groups{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.info-card-description{
+    font-weight: 500;
+}
+
+.info-card-image{
+    width: 5em;
+}
+
+.info-card-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.register-container,
+.login-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    width: 100%;
+    max-width: 22em;
+    align-items: center;
+    padding: 1em 2em;
+    gap: 2em;
+    margin-top: -10em;
+    border-radius: 2px;
+}
+
+
+.register-form,
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+
+}
+
+.text-fields-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.text-fields-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.form-errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-errors p {
+    color: red;
+}
+
+.form-errors li {
+    color: white;
+}
+
+.login-register-button{
+
+    background-color: #0A0A0A;
+    border: var(--primary) solid 1px;
+    color: white;
+    padding: .5em 1em;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+.login-register-button:hover{
+
+    background-color: var(--primary);
+    color: black;
+
+    transition: all;
+    transition-duration: .3s;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #171717;
+    max-width: 34em;
+    height: 100%;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.dashboard-segment {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.profiles-selection-container {
+
+    width: 100%;
+    max-width: 25em;
+    justify-content: flex-start;
+    padding: 1em 1.5em;
+    gap: 1em;
+    flex-direction: column;
+
+}
+
+.profile-container {
+    display: flex;
+    width: 100%;
+    height: 4em;
+    background-color: #101010;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profile-button {
+
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    border: black solid 1px;
+    border-color: black;
+    cursor: pointer;
+}
+
+
+.profile-button:hover{
+    
+    border-color: var(--secondary);
+
+    transition:all;
+    transition-duration: .3s;
+}
+
+
+.profile-buttons-container{
+
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    height: 3em;
+    align-items: center;
+
+}
+
+.edit-profile-container,
+.delete-profile-container{
+
+    width: 5em;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    background-color: black;
+    
+}
+
+
+
+
+.edit-profile-container{
+
+    border-color: var(--secondary);
+    
+}
+
+
+.delete-profile-container{
+    border-color: red;
+    
+}
+
+.edit-profile-container:hover{
+    background-color: var(--secondary);
+    color: black;
+    transition: all;
+    transition-duration: 0.3s;
+}
+
+.delete-profile-container:hover{
+    background-color: red;
+    transition: all;
+    transition-duration: 0.3s;
+}
+
+.profile-add-container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #202020;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    height: 2em;
+}
+
+.profile-add-container:hover {
+    color: var(--secondary);
+    cursor: pointer;
+
+}
+
+
+.search-option-container,
+.history-option-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 5px;
+    border: black solid 1px;
+    padding: .5em 1em;
+    cursor: pointer;
+}
+
+
+
+.selected-option-effect{
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+
+.search-option-container:hover,
+.history-option-container:hover
+{
+    border-color: var(--primary);
+    transition: all;
+    transition-duration: .3s;
+}
+
+
+
+.dashboard-content-container {
+    overflow: hidden;
+}
+
+
+
+.create-profile,
+.edit-profile {
+    display: flex;
+    flex-direction: column;
+    background-color: #505050;
+    padding: 1em 2em;
+    gap: 1em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 11;
+    display: none;
+    width: 95%;
+    max-width: 25em;
+    border-radius: 10px;
+}
+
+.edit-profile-button,
+.create-profile-button{
+
+    background-color: black;
+    padding: 0.5em 1em;
+    color: white;
+    border-radius: 5px;
+    border: black solid 1px;
+    cursor: pointer;
+}
+
+.edit-profile-button:hover,
+.create-profile-button:hover{
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transition: all;
+    transition-duration: .3s;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: .75em;
+}
+
+
+.profile-fields-container {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.delete-profile-popup-container{
+
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 11;
+    flex-direction: column;
+    width: 95%;
+    max-width: 25em;
+    height: 15em;
+    background-color: #505050;
+    display: none;
+    justify-content: space-between;
+    padding: 2em 2em;
+    align-items: center;
+    border-radius: 10px;
+
+}
+
+.delete-profile-confirm{
+    background-color: darkred;
+    color: white;
+    padding: .5em .75em;
+    border-radius: 5px;
+    border: red solid 1px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.delete-profile-confirm:hover{
+    background-color: red;
+    color: black;
+    transition: all;
+    transition-duration: .3s;
+}
+
+.background-overlay{
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: .6;
+    display: none;
+}
+
+
+.no-scroll{
+    overflow: hidden;
+}
+
+.pop-up-options-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.exit-popup-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 1em;
+    border-radius: 5px;
+    border: red solid 1px;
+    cursor: pointer;
+    background-color: black;
+}
+
+.exit-popup-container:hover{
+    
+    background-color: red;
+    color: black;
+    transition: all;
+    transition-duration: .3s;
+}
+
+
+.dashboard-divider{
+
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+
+.dashboard-content-display{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+    gap: 1em;
+}
+
+.history-content-container{
+    display: none;
+}
+
+.search-result-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: black;
+    padding: 1em;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
+.result-content-1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+    font-weight: 500;
+}
+
+.result-content-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3px;
+    color: #D0D0D0;
+}
+
+.result-content-3{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+}
+
+.job-search-button-container{
+    width: 60%;
+    max-width: 20em;
+    height: 3.5em;
+}
+
+.job-search-button{
+   width: 100%;
+   height: 100%;
+   background-color: black;
+   color: var(--primary);
+   font-weight: 600;
+   font-size: 1.5em;
+   border: var(--primary) solid 1px;
+   cursor: pointer;
+   border-radius: 10px;
+
+}
+
+.job-search-button:hover{
+    background-color: var(--primary);
+    color: black;
+    transition: all;
+    transition-duration: .3s;
+}
+
+.highlight-job-title{
+   color: var(--primary);
+   font-weight: 600;
+}
+
+.highlight-salary{
+    color: var(--secondary);
+    font-weight: 550;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    background-color: #0A0A0A;
+    border-color: var(--secondary);
+    border-width: 2px;
+    outline: none;
+}
+
+
+@media screen and (min-width:500px) {
+
+    .info-card-container{
+        flex-direction: row;
+        justify-content: flex-start;
+        max-width: 75em;
+    }
+
+    .info-card-container:nth-child(2){
+        flex-direction: row-reverse;
+    }
+
+}
+
+
+/* Media query - tablets and larger (768px) */
+
+@media screen and (min-width:768px) {
+
+    header{
+        padding: 0 2em;
+    }
+
+    .nav-left{
+        gap: .75em;
+    }
+    .info-card-image{
+        width: 6em;
+    }
+
+    .dashboard-container{
+
+        flex-direction: row;
+        max-width: 100%;
+        height: 85vh;
+        align-items: flex-start;
+    }
+
+    .dashboard-content-display{
+
+        overflow-y: scroll;
+        pointer-events: auto;
+        height: 80vh;
+       
+    }
+
+    .job-search-button{
+
+        padding: .5em 0;
+    
+    }
+
+    .dashboard-divider{
+        height: 100%;
+        width: 1px;
+    }
+
+}
