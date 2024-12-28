@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 ADZUNA_API_KEY = os.getenv('ADZUNA_API_KEY')
 ADZUNA_APP_ID = os.getenv('ADZUNA_APP_ID')
 
+results_per_request = 5
+
 
 # Adding a job search entry
 def add_job_search_entry(profile_id, job_title, redirect_url, description, company_name, location, salary_min, salary_max):
@@ -60,7 +62,7 @@ def search_jobs(profile):
 
     url = f"https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id={ADZUNA_APP_ID}&app_key={ADZUNA_API_KEY}"
 
-    url += f"&results_per_page=2"
+    url += f"&results_per_page={results_per_request}"
     url += f"&what={profile.job_title.replace(' ','%20')}"
     url += f"&where={profile.city}"
     url += f"&salary_min={profile.min_salary}"

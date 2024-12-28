@@ -47,6 +47,12 @@ def logout_view(request):
 def dashboard_view(request):
     """Unified dashboard view that includes profile management."""
 
+    profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
+    active_profile = get_active_profile_for_user(request.user)
+    profiles_count = len(profiles) # Get the amount of profiles for the user
+    profiles_history = get_profile_history(active_profile.id)
+    job_results = None
+
     if request.method == "POST":
 
         # Handle creating a profile
@@ -97,39 +103,33 @@ def dashboard_view(request):
             delete_profile(profile_id, request.user)
             messages.success(request, "Profile deleted successfully!")
 
+        if "search_jobs" in request.POST:
+            try:
+                # Use the profile to search for jobs
+                full_json_job_results = search_jobs(active_profile)
+                job_results = full_json_job_results.get("results")
+            except Exception as e:
+                messages.error(request, f"Error fetching jobs: {e}")
+                print(e)
+
+            for result in job_results:
+                add_job_search_entry(active_profile.id, result.get("title"), result.get("redirect_url"), result.get("description"), 
+                result.get("company").get("display_name"), result.get("location").get("display_name"), 
+                result.get("salary_min"), result.get("salary_max"))
+
+
         
         # After handling the POST request, redirect to reload the page
-        return redirect("dashboard")
+        if not "search_jobs" in request.POST:
+            return redirect("dashboard")
 
-    profiles = get_profiles_for_user(request.user)  # Get all profiles for the user
-    active_profile = get_active_profile_for_user(request.user)
-    profiles_count = len(profiles) # Get the amount of profiles for the user
-    profiles_history = get_profile_history(active_profile.id)
-
-    print(profiles_history)
-
-    job_results = None
-
-    try:
-        # Use the profile to search for jobs
-        full_json_job_results = search_jobs(active_profile)
-        job_results = full_json_job_results.get("results")
-    except Exception as e:
-        messages.error(request, f"Error fetching jobs: {e}")
-        print(e)
-
-    for result in job_results:
-        add_job_search_entry(active_profile.id, result.get("title"), result.get("redirect_url"), result.get("description"), 
-        result.get("company").get("display_name"), result.get("location").get("display_name"), 
-        result.get("salary_min"), result.get("salary_max"))
-
-
+    
     return render(request, 'dashboard.html', {
         'profiles': profiles,
         "profiles_count": profiles_count,
         "active_profile": active_profile,
         "profiles_history":profiles_history,
-        "jb": job_results
+        "job_results": job_results
         })
 
   

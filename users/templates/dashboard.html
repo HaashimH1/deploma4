@@ -57,8 +57,8 @@
     <div class="dashboard-segment dashboard-content-container">
         
         <div class="dashboard-content-display search-content-container">
-           <h2>Search</h1>
-            {% for result in jb%}
+           
+            {% for result in job_results%}
 
             <div class="search-result-container" data-link="{{result.redirect_url}}">
                 <div class="result-content-1">
@@ -79,13 +79,24 @@
             
             {% endfor%}
 
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="profile_id" value="{{ profile.id }}">
+                <button type="submit" name="search_jobs" class="profile-button">
+                    Click to get some jobs !
+                </button>
+
+            </form>
+
+            <h2>Search</h1>
+
 
             
             
         </div>
 
         <div class="dashboard-content-display history-content-container">
-            <h2>History</h1>
+            
 
                 {% for result in profiles_history %}
 
@@ -107,6 +118,8 @@
                 
                 
                 {% endfor%}
+
+                <h2>History</h1>
 
              
             
