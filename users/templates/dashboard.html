@@ -4,209 +4,197 @@
 
 {% block content %}
 
+<!-- Background Overlay -->
 <div class="background-overlay"></div>
-
-
 
 <div class="dashboard-container">
 
-    <div class="dashboard-segment profiles-selection-container">
+  <!-- Profile Selection Section -->
+  <div class="dashboard-segment profiles-selection-container">
 
-        {% for profile in profiles %}
-        <form method="post" class="profile-container">
-            {% csrf_token %}
-            <input type="hidden" name="profile_id" value="{{ profile.id }}">
-            <button type="submit" name="activate_profile" class="profile-button" {% if profile.active %}
-                style="background-color: var(--secondary); color: black;" {% endif %}>
-                {{ profile.job_title }}
-            </button>
-        </form>
-        {% endfor %}
+    <!-- Profile Buttons -->
+    {% for profile in profiles %}
+    <form method="post" class="profile-container">
+      {% csrf_token %}
+      <input type="hidden" name="profile_id" value="{{ profile.id }}">
+      <button type="submit" name="activate_profile" class="profile-button" 
+              {% if profile.active %} style="background-color: var(--secondary); color: black;" {% endif %}>
+        {{ profile.job_title }}
+      </button>
+    </form>
+    {% endfor %}
 
-        {% if active_profile %}
-        <div class="profile-buttons-container">
-            <div class="edit-profile-container">Edit</div>
-            <div class="delete-profile-container">Delete</div>
-        </div>
-        {% endif %}
-
-        {% if profiles_count < 5 %}
-        <div class="profile-add-container">
-            +
-        </div>
-        {% endif %}
-        
-        {% if active_profile %}
-        <h3>Functions</h3>
-        <div class="profile-buttons-container">
-            <div class="search-option-container selected-option-effect">Jobs</div>
-            <div class="history-option-container">History</div>
-        </div>
-        {% endif %}
-
+    <!-- Edit and Delete Buttons for Active Profile -->
+    {% if active_profile %}
+    <div class="profile-buttons-container">
+      <div class="edit-profile-container">Edit</div>
+      <div class="delete-profile-container">Delete</div>
     </div>
-
-    <div class="dashboard-divider"></div>
-
-    <div class="dashboard-segment dashboard-content-container">
-        
-        <div class="dashboard-content-display search-content-container">
-
-            
-           
-
-            {% if job_results%}
-            {% for result in job_results%}
-            <div class="search-result-container" data-link="{{result.redirect_url}}">
-                <div class="result-content-1">
-                    <p><span class="highlight-job-title">{{result.title}}</span> | {{result.company.display_name}}  | {{result.location.display_name}}</p>
-                </div>
-                <div class="result-content-2">
-                    {{result.description}}
-                </div>
-                <div class="result-content3">
-                    <p>Salary range of <span class="highlight-salary">{{result.salary_min}}</span> to 
-                        <span class="highlight-salary">{{result.salary_max}}</span></p>
-                </div>
-            </div>
-            {% endfor%}
-            {% else %}
-            <p>Make sure:</p>
-            <ul>
-                <li>City is spelt correctly and in UK</li>
-                <li>Job Title is spelt correctly</li>
-                <li>Valid salary amount</li>
-            </ul>
-            <p>If no jobs are displaying, then the above need to checked</p>
-            {% endif %}
-
-            {% if active_profile %}
-            <form method="POST" class="job-search-button-container">
-                {% csrf_token %}
-                <button type="submit" name="search_jobs" class="job-search-button">Search</button>
-            </form>
-            {% else %}
-            <h2>Must Create at least 1 Profile</h2>
-            {% endif %}
-  
-        </div>
-
-        <div class="dashboard-content-display history-content-container">
-
-            <h2>History</h1>
-            
-                {% for result in profiles_history %}
-
-                <div class="search-result-container" data-link="{{result.redirect_url}}">
-                    <div class="result-content-1">
-                        <p><span class="highlight-job-title">{{result.job_title}}</span> | {{result.company_name}}  | {{result.location}}</p>
-                    </div>
-                    <div class="result-content-2">
-                        {{result.description}}
-                    </div>
-                    <div class="result-content3">
-                        <p>Salary range of <span class="highlight-salary">{{result.salary_min}}</span> to <span
-                                class="highlight-salary">{{result.salary_max}}</span></p>
-                    </div>
-                </div>
-                
-                
-                {% endfor%}
-
-        </div>
-    </div>
-</div>
-
-
-<div class="create-profile">
-    <h2>New Profile</h2>
-    <form method="post" class="profile-form">
-        {% csrf_token %}
-
-        <div class="profile-fields-container">
-            <label for="job_title">Job Title:</label>
-            <input type="text" id="job_title" name="job_title" required>
-        </div>
-
-        <div class="profile-fields-container">
-            <label for="min_salary">Minimum Salary:</label>
-            <input type="number" id="min_salary" name="min_salary">
-        </div>
-
-        <div class="profile-fields-container">
-            <label for="is_full_time">Full-Time:</label>
-            <input type="checkbox" id="is_full_time" name="is_full_time">
-        </div>
-
-        <div class="profile-fields-container">
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" required>
-        </div>
-
-        <div class="pop-up-options-container">
-            <button type="submit" name="create_profile" class="create-profile-button">Create</button>
-            <div class="exit-popup-container">Exit</div>
-        </div>
-
-    </form>
-</div>
-
-
-<div class="edit-profile">
-    <h2>Edit Profile</h2>
-    <form method="post" class="profile-form">
-        {% csrf_token %}
-
-        <div class="profile-fields-container">
-            <label for="job_title">Job Title:</label>
-            <input type="text" id="job_title" name="job_title" value="{{active_profile.job_title}}" required>
-        </div>
-
-        <div class="profile-fields-container">
-            <label for="min_salary">Minimum Salary:</label>
-            <input type="number" id="min_salary" name="min_salary" value="{{active_profile.min_salary}}" required>
-        </div>
-
-        <div class="profile-fields-container">
-            <label for="is_full_time">Full-Time:</label>
-            <input type="checkbox" id="is_full_time" name="is_full_time" {% if active_profile.is_full_time %} checked {% endif %}>
-        </div>
-
-        <div class="profile-fields-container">
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" value="{{active_profile.city}}" required>
-        </div>
-
-        <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
-
-        <div class="pop-up-options-container">
-            <button type="submit" name="edit_profile" class="edit-profile-button">Save</button>
-            <div class="exit-popup-container">Exit</div>
-        </div>
-
-    </form>
-</div>
-
-
-<div class="delete-profile-popup-container">
-
-    {% if profiles_count > 1 %}
-    <p>Are you sure you want to <span style="color: red;">DELETE</span></p>
-    <p>{{ active_profile.job_title }}</p>
-    <form method="post" class="pop-up-options-container">
-        {% csrf_token %}
-        <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
-        <button type="submit" name="delete_profile" class="delete-profile-confirm">DELETE PERMANENTLY</button>
-        <div class="exit-popup-container">Exit</div>
-    </form>
-
-    {% else %}
-    <p>Cannot delete this profile as its your only profile</p>
-    <p>Edit this profile, or make a new profile</p>
-    <div class="exit-popup-container">Exit</div>
     {% endif %}
 
+    <!-- Add New Profile Button -->
+    {% if profiles_count < 5 %}
+    <div class="profile-add-container">+</div>
+    {% endif %}
+
+    <!-- Functions Section -->
+    {% if active_profile %}
+    <h3>Functions</h3>
+    <div class="profile-buttons-container">
+      <div class="search-option-container selected-option-effect">Jobs</div>
+      <div class="history-option-container">History</div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <!-- Divider -->
+  <div class="dashboard-divider"></div>
+
+  <!-- Content Section -->
+  <div class="dashboard-segment dashboard-content-container">
+
+    <!-- Job Search Content -->
+    <div class="dashboard-content-display search-content-container">
+      {% if job_results %}
+      {% for result in job_results %}
+      <div class="search-result-container" data-link="{{ result.redirect_url }}">
+        <div class="result-content-1">
+          <p>
+            <span class="highlight-job-title">{{ result.title }}</span> |
+            {{ result.company.display_name }} |
+            {{ result.location.display_name }}
+          </p>
+        </div>
+        <div class="result-content-2">{{ result.description }}</div>
+        <div class="result-content3">
+          <p>Salary range: 
+            <span class="highlight-salary">{{ result.salary_min }}</span> -
+            <span class="highlight-salary">{{ result.salary_max }}</span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>Ensure the following:</p>
+      <ul>
+        <li>City is spelt correctly and in the UK.</li>
+        <li>Job title is accurate.</li>
+        <li>Valid salary range is provided.</li>
+      </ul>
+      <p>If no jobs display, review the above criteria.</p>
+      {% endif %}
+
+      {% if active_profile %}
+      <form method="POST" class="job-search-button-container">
+        {% csrf_token %}
+        <button type="submit" name="search_jobs" class="job-search-button">Search</button>
+      </form>
+      {% else %}
+      <h2>Create at least one profile to search jobs</h2>
+      {% endif %}
+    </div>
+
+    <!-- History Content -->
+    <div class="dashboard-content-display history-content-container">
+      <h2>History</h2>
+      {% for result in profiles_history %}
+      <div class="search-result-container" data-link="{{ result.redirect_url }}">
+        <div class="result-content-1">
+          <p>
+            <span class="highlight-job-title">{{ result.job_title }}</span> |
+            {{ result.company_name }} |
+            {{ result.location }}
+          </p>
+        </div>
+        <div class="result-content-2">{{ result.description }}</div>
+        <div class="result-content3">
+          <p>Salary range: 
+            <span class="highlight-salary">{{ result.salary_min }}</span> -
+            <span class="highlight-salary">{{ result.salary_max }}</span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
 </div>
 
+<!-- Create Profile Popup -->
+<div class="create-profile">
+  <h2>New Profile</h2>
+  <form method="post" class="profile-form">
+    {% csrf_token %}
+    <div class="profile-fields-container">
+      <label for="job_title">Job Title:</label>
+      <input type="text" id="job_title" name="job_title" required>
+    </div>
+    <div class="profile-fields-container">
+      <label for="min_salary">Minimum Salary:</label>
+      <input type="number" id="min_salary" name="min_salary">
+    </div>
+    <div class="profile-fields-container">
+      <label for="is_full_time">Full-Time:</label>
+      <input type="checkbox" id="is_full_time" name="is_full_time">
+    </div>
+    <div class="profile-fields-container">
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" required>
+    </div>
+    <div class="pop-up-options-container">
+      <button type="submit" name="create_profile" class="create-profile-button">Create</button>
+      <div class="exit-popup-container">Exit</div>
+    </div>
+  </form>
+</div>
+
+<!-- Edit Profile Popup -->
+<div class="edit-profile">
+  <h2>Edit Profile</h2>
+  <form method="post" class="profile-form">
+    {% csrf_token %}
+    <div class="profile-fields-container">
+      <label for="job_title">Job Title:</label>
+      <input type="text" id="job_title" name="job_title" value="{{ active_profile.job_title }}" required>
+    </div>
+    <div class="profile-fields-container">
+      <label for="min_salary">Minimum Salary:</label>
+      <input type="number" id="min_salary" name="min_salary" value="{{ active_profile.min_salary }}" required>
+    </div>
+    <div class="profile-fields-container">
+      <label for="is_full_time">Full-Time:</label>
+      <input type="checkbox" id="is_full_time" name="is_full_time" {% if active_profile.is_full_time %} checked {% endif %}>
+    </div>
+    <div class="profile-fields-container">
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" value="{{ active_profile.city }}" required>
+    </div>
+    <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
+    <div class="pop-up-options-container">
+      <button type="submit" name="edit_profile" class="edit-profile-button">Save</button>
+      <div class="exit-popup-container">Exit</div>
+    </div>
+  </form>
+</div>
+
+<!-- Delete Profile Popup -->
+<div class="delete-profile-popup-container">
+  {% if profiles_count > 1 %}
+  <p>Are you sure you want to <span style="color: red;">DELETE</span>:</p>
+  <p>{{ active_profile.job_title }}</p>
+  <form method="post" class="pop-up-options-container">
+    {% csrf_token %}
+    <input type="hidden" name="profile_id" value="{{ active_profile.id }}">
+    <button type="submit" name="delete_profile" class="delete-profile-confirm">DELETE PERMANENTLY</button>
+    <div class="exit-popup-container">Exit</div>
+  </form>
+  {% else %}
+  <p>Cannot delete this profile as it is your only profile.</p>
+  <p>Create a new profile before deleting this one.</p>
+  <div class="exit-popup-container">Exit</div>
+  {% endif %}
+</div>
 
 {% endblock %}

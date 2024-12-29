@@ -6,43 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Job Search{% endblock %}</title>
 
-    <!-- Own CSS-->
+    <!-- CSS Styles -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
 
   <body>
     <header>
       <nav>
+        <!-- Left Navigation -->
         <div class="nav-left">
-            <div class="nav-logo-container">
-              <img
-                src="{% static 'images/logo.png' %}"
-                class="nav-logo"
-              />
-            </div>
-            <div class="nav-title">Pattern</div>
-
+          <div class="nav-logo-container">
+            <img
+              src="{% static 'images/logo.png' %}"
+              class="nav-logo"
+              alt="Patterned Jobs Logo"
+            />
+          </div>
+          <div class="nav-title">Pattern</div>
         </div>
 
+        <!-- Right Navigation -->
         <div class="nav-right">
           {% if user.is_authenticated %}
-          <div class="nav-button">
-            <a href="{% url 'dashboard' %}">Dashboard</a>
-          </div>
-          <div class="nav-button"><a href="{% url 'logout' %}">Logout</a></div>
+            <div class="nav-button">
+              <a href="{% url 'dashboard' %}">Dashboard</a>
+            </div>
+            <div class="nav-button">
+              <a href="{% url 'logout' %}">Logout</a>
+            </div>
           {% else %}
-          <div class="nav-button"><a href="{% url 'login' %}">Login</a></div>
-          <div class="nav-button">
-            <a href="{% url 'register' %}">Register</a>
-          </div>
+            <div class="nav-button">
+              <a href="{% url 'login' %}">Login</a>
+            </div>
+            <div class="nav-button">
+              <a href="{% url 'register' %}">Register</a>
+            </div>
           {% endif %}
         </div>
       </nav>
     </header>
-    <main>{% block content %}{% endblock %}</main>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
     <footer>
       <p>&copy; 2024 Patterned Jobs</p>
     </footer>
+
+    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/custom.js' %}"></script>
   </body>
