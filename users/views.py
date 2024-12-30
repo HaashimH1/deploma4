@@ -12,9 +12,11 @@ from profiles.utils import (
     delete_profile,
     make_all_profiles_inactive,
     activate_profile_for_user,
-    get_active_profile_for_user
+    get_active_profile_for_user,
+    add_job_search_entry,
+    get_profile_history
 )
-from api.utils import search_jobs, add_job_search_entry, get_profile_history
+from api.utils import search_jobs
 
 
 def home_view(request):

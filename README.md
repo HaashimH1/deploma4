@@ -226,7 +226,95 @@ Each Job result is designed like so:
 - Salary figures highlighted in yellow to also highlight the importance of this data, however different colour than the job title to signify the difference of the data shown.
 - Having the job title at the top with one colour, and the salary figures at the bottom with another colour can further help the user differentiate between different results as those different coloured data that are at the bottom and top of each result act as a wrapper to that result.
 
+## **Implementation**
+
+Since this is a Django based web app, directory structure consists of apps with multiple .py files.
+
+### Overall Structure
+| Name     | Type     | Use      |
+|----------|----------|----------|
+| my_project  | Directory, Django App | Main Django App |
+| users  | Directory, Django App | handles all user related processes |
+| profiles  | Directory, Django App  | handles all profile related processes|
+| api  | Directory, Django App  | handles all API processes  |
+| requirements  | Text  | Snapshot of all modules used  |
+| staticfiles  | Directory  | holds files such as css, js and images  |
+| templates  | Directory  | holds all HTML files  |
+| manage  | Python  | holds the main() function, starts the web app  |
+
+Both profiles and api apps have a utility file, instead of thos apps having its own views/pages, the users holds all the views and pages, and it uses the utility functions to handle profile or api use.
+
+### Models / App
+
+Below shows a table of each model, its attributes, keys and features.
+
+#### Users
+
+Uses the Django based User model to handle login, registration, authentication and logout, with its pre defined model and utilitys.
+
+| Attribute | Type |
+|----------|----------|
+| Username | String  |
+| Email  | String  | 
+| Password1 | Hash  | 
+| Password2  | Hash |
+
+
+#### Profiles
+
+| Attribute | Type | Settings |
+|----------|----------|----------|
+| user  | Foreign Key  | FK to User, delon_delete=models.CASCADE |
+| job_title  | String  | max_length=100  |
+| min_salary | Integer  | null=True, blank=True  |
+| is_full_time  | Boolean  | default=True  |
+| city  | String  | max_length=100  |
+| active  | Boolen  | blank=True  |
+
+`active`: This attribute is to hold which profile is selected, only 1 profile can be active for every user, implementing it like this would make so if the user refreshes or logs out, on return the profile that is selected will be the last used one. This attribute also helps when determining which profile to apply certain thinds like edit, delete, job search etc.. These utilitys will apply to the onlyactive profile
+
+The profiles app holds a utils.py file which holds all functions to interact with the model, For example:
+
+```python
+def get_profile_history(profile_id):
+    """
+    Retrieve the job search history for a specific profile.
+
+    :param profile_id: ID of the Profile
+    :return: Queryset of JobSearchHistory entries, ordered from newest to oldest
+    """
+    profile = Profile.objects.get(id=profile_id)
+    return profile.history.all().order_by("-id")
+```
+
+This function will return all History job results for a given profile in reverse order.
+
+
+#### JobSearchHistory
+
+| Attribute       | Type         | Settings                                    |
+|------------------|--------------|--------------------------------------------|
+| profile         | Foreign Key  | FK to Profile, on_delete=models.CASCADE, related_name='history' |
+| job_title       | String       | max_length=255                             |
+| redirect_url    | URLField     | URL to the job posting                     |
+| description     | Text         | Description of the job                     |
+| company_name    | String       | max_length=255, null=True, blank=True      |
+| location        | String       | max_length=255, default="N/A"              |
+| salary_min      | Integer      | null=True, blank=True                      |
+| salary_max      | Integer      | null=True, blank=True                      |
+| created_at      | DateTime     | auto_now_add=True                          |
+
+Holds each job result ever searched for each profile, holds utilitys to make sure there are no duplicates based on the description.
+
+
+#### Adzuna API
+
+This app does not hold a model, but has a utils.py to handle all API processes. An example of a function in utils:
+
+```python
+```
 
 
 
-## Implementation
+
+
