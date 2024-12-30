@@ -3,8 +3,23 @@ Pattern Jobs is an intuitive platform designed to change the job value tool. The
 
 Live site can be found [Here](https://deploma4-9a881a09cb04.herokuapp.com/)
 
-## **Table of Content**
-glossary
+## **Table of Contents**
+
+1. [Pattern Jobs](#pattern-jobs)
+2. [Table of Content](#table-of-content)
+3. [User Experience (UX)](#user-experience-ux)
+   - [Target Audience](#target-audience)
+   - [User Goals](#user-goals)
+   - [User Stories](#user-stories)
+   - [Intuitive and Consistent Design](#intuitive-and-consistent-design)
+   - [Key UX Design Principles](#key-ux-design-principles)
+4. [Design](#design)
+   - [Colour Palette](#colour-palette)
+   - [Features Walkthrough](#features-walkthrough)
+     - [Home Page](#home-page)
+       - [Nav Bar](#nav-bar)
+       - [Hero Segment](#hero-segme
+
 
 ## **User Experience (UX)**
 
