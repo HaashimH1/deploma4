@@ -1,5 +1,5 @@
 # Pattern Jobs
-Pattern Jobs is an intuitive platform designed to change the job value tool. The main goal of Pattern is to provide a user-friendly and efficient platform where users can set what kind of job they are looking for, search for roles based on personalized profiles, and watch their job application history. Pattern Jobs by the use of strong APIs, Pattern Jobs, is the one that takes the job-hunting process the farthest, making it simple both for users looking for new opportunities and for those who are just passively browsing.
+Pattern Jobs is an intuitive platform designed to change the job value tool. The main goal of Pattern is to provide a user-friendly and efficient platform where users can set what kind of job they are looking for, search for roles based on personalized profiles, and watch their job application history. Pattern Jobs by the use Adzunas Ad Search API. Pattern Jobs, is the one that takes the job-hunting process the farthest, making it simple both for users looking for new opportunities and for those who are just passively browsing.
 
 Live site can be found [Here](https://deploma4-9a881a09cb04.herokuapp.com/)
 
@@ -276,18 +276,24 @@ Uses the Django based User model to handle login, registration, authentication a
 The profiles app holds a utils.py file which holds all functions to interact with the model, For example:
 
 ```python
-def get_profile_history(profile_id):
+def activate_profile_for_user(user, profile_id):
     """
-    Retrieve the job search history for a specific profile.
+    Activate a specific profile for a user and deactivate all others.
 
-    :param profile_id: ID of the Profile
-    :return: Queryset of JobSearchHistory entries, ordered from newest to oldest
+    :param user: The user who owns the profiles.
+    :param profile_id: The ID of the profile to activate.
+    :raises Profile.DoesNotExist: If the profile does not exist or does not belong to the user.
+    :return: The activated Profile object.
     """
-    profile = Profile.objects.get(id=profile_id)
-    return profile.history.all().order_by("-id")
+    make_all_profiles_inactive(user)  # Deactivate all other profiles
+
+    profile = Profile.objects.get(id=profile_id, user=user)  # Activate the selected profile
+    profile.active = True
+    profile.save()
+    return profile
 ```
 
-This function will return all History job results for a given profile in reverse order.
+This function makes a given profile active, whilst making all other profiles inactive (active = false)
 
 
 #### JobSearchHistory
@@ -307,12 +313,97 @@ This function will return all History job results for a given profile in reverse
 Holds each job result ever searched for each profile, holds utilitys to make sure there are no duplicates based on the description.
 
 
-#### Adzuna API
+#### API
 
 This app does not hold a model, but has a utils.py to handle all API processes. An example of a function in utils:
 
 ```python
+def search_jobs(profile):
+    """
+    Search for jobs using the Adzuna API based on a Profile's attributes.
+
+    :param profile: A Profile instance with fields like job_title, city, min_salary, and is_full_time
+    :return: JSON response from the Adzuna API containing job listings
+    :raises ValueError: If API credentials are missing
+    :raises HTTPError: If the API request fails
+    """
+    if not ADZUNA_API_KEY or not ADZUNA_APP_ID:
+        raise ValueError("API key or App ID is missing. Please set them in env.py.")
+
+    # Construct the request URL
+    url = (
+        f"https://api.adzuna.com/v1/api/jobs/gb/search/1?"
+        f"app_id={ADZUNA_APP_ID}&app_key={ADZUNA_API_KEY}"
+        f"&results_per_page={RESULTS_PER_REQUEST}"
+        f"&what={profile.job_title.replace(' ', '%20')}"
+        f"&where={profile.city}"
+        f"&salary_min={profile.min_salary}"
+    )
+
+    # Add full-time or part-time preference
+    if profile.is_full_time:
+        url += "&full_time=1"
+    else:
+        url += "&part_time=1"
+
+    url += "&content-type=application/json"
+
+    # Make the API request
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an error for bad HTTP responses
+
+    return response.json()
 ```
+
+functions does a API request using a given profiles parameters, then return results in JSON form.
+
+#### Templates
+
+Each page is extend of a `base.html` template.
+
+## **Technologies Used**
+### Languages and Frameworks
+- **Python**: Used as the main programming language for backend logic and API integrations.
+- **Django**: Framework used for managing views, URLs, models, and template rendering.
+- **HTML**: Provides the structure of the web pages.
+- **CSS**: Handles the styling and layout of the web pages, including responsiveness.
+- **JavaScript JQuery**: Implements client-side interactivity.
+
+### Development Tools
+- **GitPod - Visual Studio Code**: IDE for writing, editing, and debugging code.
+- **Git**: Version control system to track changes and manage collaboration.
+- **GitHub**: Repository hosting platform for storing and sharing the project's codebase.
+
+### Deployment
+- **Heroku**: Used to deploy the live version of the project.
+- **Gunicorn**: WSGI HTTP server for deploying the Django application on Heroku.
+
+### Browsers for Testing
+- **Google Chrome**
+- **Mozilla Firefox**
+- **Microsoft Edge**
+- **Safari**
+
+### Devices for Testing
+- **Smartphones**: Samsung Galaxy S21, iPhone 12 Pro, Google Pixel 6.
+- **Tablets**: iPad Air, Samsung Tab S7.
+- **Desktops**: Tested across various screen sizes to ensure responsiveness.
+
+
+
+
+
+
+## **Testing**
+### Code Validation
+All code passed through its respective validators:
+- `Python`: PEP8
+- `HTML`: W3C
+- `CSS`: W3C Jigsaw
+- `JavaScript`: JSHint
+
+### Manual Testing
+
 
 
 

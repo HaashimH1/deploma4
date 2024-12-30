@@ -161,7 +161,7 @@ def job_search_exists(profile_id, description, job_title):
     :param description: Description of the job search
     :return: True if a search with the same description exists, False otherwise
     """
-    return JobSearchHistory.objects.filter(profile_id=profile_id, description=description, job_title=job_title ).exists()
+    return JobSearchHistory.objects.filter(profile_id=profile_id, description=description, job_title=job_title).exists()
 
 
 def get_profile_history(profile_id):
