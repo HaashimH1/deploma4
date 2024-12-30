@@ -585,7 +585,10 @@ By following these steps, the application can be deployed and tested successfull
 
 ## Credits
 
-sd
+- All images used were generated from text descriptions with [DALL-E Open-AI](https://openai.com/index/dall-e-3/)
+- Font is from [Google Fonts](https://fonts.google.com/)
+- Feature Implementation guidance using [Chat GPT](https://openai.com/index/chatgpt/)
+- Project setup using rescources at [Code Institute](https://codeinstitute.net/)
 
 
 
