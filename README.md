@@ -359,7 +359,30 @@ functions does a API request using a given profiles parameters, then return resu
 
 #### Templates
 
-Each page is extend of a `base.html` template.
+Each page is extend of a `base.html` template. This makes it so much easier to make pages with the same features. For example, Nav bar and footer only implemented 1 time in the base, then all other pages get it by extending off it.
+
+Each page can then change the title:
+
+```html
+<title>{% block title %}Job Search{% endblock %}</title>
+```
+
+And the main for its content:
+
+```html
+ <main>
+      {% block content %}{% endblock %}
+    </main>
+```
+
+Exmaple of how `login.html` is extending of base and changing the title:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+```
+
 
 ## **Technologies Used**
 ### Languages and Frameworks
@@ -378,22 +401,6 @@ Each page is extend of a `base.html` template.
 - **Heroku**: Used to deploy the live version of the project.
 - **Gunicorn**: WSGI HTTP server for deploying the Django application on Heroku.
 
-### Browsers for Testing
-- **Google Chrome**
-- **Mozilla Firefox**
-- **Microsoft Edge**
-- **Safari**
-
-### Devices for Testing
-- **Smartphones**: Samsung Galaxy S21, iPhone 12 Pro, Google Pixel 6.
-- **Tablets**: iPad Air, Samsung Tab S7.
-- **Desktops**: Tested across various screen sizes to ensure responsiveness.
-
-
-
-
-
-
 ## **Testing**
 ### Code Validation
 All code passed through its respective validators:
@@ -402,7 +409,170 @@ All code passed through its respective validators:
 - `CSS`: W3C Jigsaw
 - `JavaScript`: JSHint
 
-### Manual Testing
+## Manual Testing Table
+
+| **Feature**                     | **Test Description**                                                                 | **Expected Outcome**                                                                                           | **Result** |
+|----------------------------------|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|------------|
+| **Navigation**                  | Ensure all navigation links (Register, Login, Logout) are functional.               | Each link redirects to the correct page without errors.                                                       | PASS       |
+| **Register**                    | Test registration with valid inputs.                                                | User account is created, and the user is redirected to the login page.                                        | PASS       |
+|                                  | Test registration with invalid inputs (e.g., missing fields, invalid email).         | Error messages are displayed, and the user cannot proceed until the errors are resolved.                      | PASS       |
+| **Login**                       | Test login with valid credentials.                                                  | User is redirected to the dashboard after successful login.                                                   | PASS       |
+|                                  | Test login with invalid credentials.                                                | Error message "Invalid Login. Please try again" is displayed, and the user remains on the login page.         | PASS       |
+| **Logout**                      | Test logout functionality.                                                          | User is redirected to the homepage, and the session is terminated.                                            | PASS       |
+| **Dashboard**                   | Ensure active profiles are displayed correctly.                                     | The active profile is highlighted, and others remain inactive.                                                | PASS       |
+|                                  | Test adding a profile.                                                              | New profile appears in the list, and the number of profiles updates accordingly. Cant add profile if 5 profile limit is reached                             | PASS       |
+|                                  | Test editing a profile.                                                             | Changes to the profile (e.g., job title, salary) are saved and reflected immediately.                         | PASS       |
+|                                  | Test deleting a profile.                                                            | Profile is removed, and the profiles count updates. Error shown if user tries to delete the last profile.     | PASS       |
+| **Job Search**                  | Search with valid parameters (e.g., job title, city, salary).                       | Job results are displayed with relevant information (e.g., title, company, salary).                           | PASS       |
+|                                  | Search with invalid parameters (e.g., empty fields, non-existent city).             | No results are displayed, and guidance is shown for improving search parameters.                              | PASS       |
+| **Job History**                 | Ensure the history of job searches is displayed.                                    | Previously searched jobs appear in reverse chronological order.                                               | PASS       |
+| **Popup Modals**                | Test "Add Profile" modal.                                                          | Modal opens and closes correctly, cannot interact with background elements, and new profile data is validated and saved.                                | PASS       |
+|                                  | Test "Edit Profile" modal.                                                         | Modal opens and closes correctly, cannot interact with background elements, and edited profile data is saved.                                           | PASS       |
+|                                  | Test "Delete Profile" modal.                                                       | Modal opens and prompts for confirmation cannot interact with background elements. Profile is deleted only after confirmation.                         | PASS       |
+| **Accessibility**               | Test navigation using only the keyboard (tab, enter).                              | All interactive elements are accessible and can be activated without a mouse.                                 | PASS       |
+|                                  | Test site responsiveness on various screen sizes.                                   | Layout adapts correctly for mobile, tablet, and desktop views.                                                | PASS       |
+| **Error Handling**              | Test invalid inputs for all forms (e.g., blank fields, invalid formats).           | Error messages are displayed, and the user is unable to proceed until corrections are made.                   | PASS       |
+| **Deployment**                  | Ensure the site is live and accessible via the deployed URL.                       | The website is accessible via the Heroku or GitHub-hosted URL.                                                | PASS       |
+|                                  | Test all pages for load times and general performance.                              | All pages load within 2-3 seconds on average, with no missing resources.                                      | PASS       |
+| **Database Integration**        | Test CRUD operations for profiles and job history.                                 | Profiles and history data are correctly stored, retrieved, updated, and deleted in the database.              | PASS       |
+| **Validation**                  | Validate form fields for all scenarios (e.g., email format, required fields).       | Form submissions are only allowed with valid inputs; invalid inputs trigger descriptive error messages.        | PASS       |
+| **Session Management**          | Test session expiry by staying idle after logging in.                              | User is logged out after a predefined session expiry time.                                                    | PASS       |
+|                                  | Test session persistence by closing and reopening the browser.                      | User remains logged in if session is active; otherwise, the session ends.                            | PASS       |
+| **API Integration**             | Test Adzuna API integration by searching for jobs.                                  | Relevant job results are returned from the API and displayed in the dashboard.                                | PASS       |
+
+
+## Deployment
+
+This section explains how the project was deployed and made accessible online, along with the steps to replicate the deployment process.
+
+---
+
+### **Hosting Platform**
+The project is hosted on **Heroku**, which allows deploying Django applications with ease. GitHub was used for version control and as a source repository for the deployment.
+
+---
+
+### **Steps to Deploy on Heroku**
+
+1. **Create a Heroku Account**
+   - Visit [Heroku's website](https://www.heroku.com/) and create an account if you don’t already have one.
+
+2. **Install Heroku CLI**
+   - Download and install the Heroku Command Line Interface (CLI) from [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+
+3. **Prepare the Django Project**
+   - Add the required dependencies to `requirements.txt` by running:
+     ```bash
+     pip freeze > requirements.txt
+     ```
+   - Create a `Procfile` in the root directory to specify the application process type:
+     ```plaintext
+     web: gunicorn my_project.wsgi
+     ```
+   - Ensure `ALLOWED_HOSTS` in `settings.py` includes the Heroku app domain:
+     ```python
+     ALLOWED_HOSTS = ['your-heroku-app-name.herokuapp.com']
+     ```
+
+4. **Initialize a New Heroku App**
+   - Log in to Heroku using the CLI:
+     ```bash
+     heroku login -i
+     ```
+   - Create a new app:
+     ```bash
+     heroku create your-heroku-app-name
+     ```
+
+5. **Configure Heroku Environment Variables**
+   - Set up configuration variables for the project using the Heroku dashboard or CLI:
+     ```bash
+     heroku config:set DEBUG=False
+     heroku config:set SECRET_KEY='your-secret-key'
+     heroku config:set DATABASE_URL='your-database-url'
+     ```
+   - Add any other environment variables needed (e.g., API keys).
+
+6. **Connect to GitHub Repository**
+   - In the Heroku dashboard:
+     1. Go to the "Deploy" tab.
+     2. Select "GitHub" as the deployment method.
+     3. Search for your repository and connect it.
+
+7. **Deploy the Application**
+   - In the "Deploy" tab, enable automatic deploys from the `main` branch, or manually deploy by clicking "Deploy Branch."
+
+8. **Verify Deployment**
+   - After deployment, access the live site via the provided Heroku URL:
+     ```plaintext
+     https://your-heroku-app-name.herokuapp.com
+     ```
+
+---
+
+### **Cloning the Repository Locally**
+
+To work on the project locally, follow these steps:
+
+1. **Clone the Repository**
+   - Run the following command:
+     ```bash
+     git clone https://github.com/your-username/your-repository-name.git
+     ```
+
+2. **Set Up a Virtual Environment**
+   - Navigate into the project directory and create a virtual environment:
+     ```bash
+     python -m venv venv
+     ```
+   - Activate the virtual environment:
+     ```bash
+     # Windows
+     venv\Scripts\activate
+     
+     # macOS/Linux
+     source venv/bin/activate
+     ```
+
+3. **Install Dependencies**
+   - Install the required packages:
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+4. **Run the Application Locally**
+   - Apply migrations and start the development server:
+     ```bash
+     python manage.py migrate
+     python manage.py runserver
+     ```
+   - Open `http://127.0.0.1:8000` in your browser to view the project locally.
+
+---
+
+### **PostgreSQL Integration**
+- A PostgreSQL database was used for production. Heroku automatically provisions this database.
+- The database URL is added to the `DATABASES` configuration in `settings.py` via an environment variable.
+
+---
+
+### **Final Verification**
+Ensure the following are functional after deployment:
+- Navigation links work as expected.
+- User authentication (registration, login, logout) is seamless.
+- Job search and history features retrieve data correctly.
+- Responsive design works across all devices.
+
+---
+
+By following these steps, the application can be deployed and tested successfully on Heroku or any similar hosting platform.
+
+
+## Credits
+
+sd
+
+
 
 
 
