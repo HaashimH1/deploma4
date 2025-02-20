@@ -22,8 +22,13 @@ def get_active_profile_for_user(user):
     :return: The active Profile object, or None if no active profile exists.
     """
     try:
-        return Profile.objects.get(user=user, active=True)
+        active_profile = Profile.objects.get(user=user, active=True)
+        return active_profile
     except Profile.DoesNotExist:
+        return None
+    except Profile.MultipleObjectsReturned:
+        # If multiple active profiles exist, deactivate all and return None
+        make_all_profiles_inactive(user)
         return None
 
 
@@ -41,6 +46,12 @@ def create_profile(user, job_title, min_salary, is_full_time, city):
     """
     if Profile.objects.filter(user=user).count() >= 5:
         raise ValidationError("You can only create up to 5 profiles.")
+    
+    if int(min_salary) > 2147483647:
+        raise ValidationError("Salary cannot exceed 2,147,483,647.")
+        
+    elif int(min_salary) < 0:
+        raise ValidationError("Salary cannot be negative.")
 
     make_all_profiles_inactive(user)  # Set all other profiles as inactive
     return Profile.objects.create(
@@ -65,6 +76,13 @@ def edit_profile(profile_id, user, job_title, min_salary, is_full_time, city):
     :param city: Updated city preference.
     :return: The updated Profile object.
     """
+
+    if int(min_salary) > 2147483647:
+        raise ValidationError("Salary cannot exceed 2,147,483,647.")
+        
+    elif int(min_salary) < 0:
+        raise ValidationError("Salary cannot be negative.")
+
     profile = Profile.objects.get(id=profile_id, user=user)
     profile.job_title = job_title
     profile.min_salary = min_salary
