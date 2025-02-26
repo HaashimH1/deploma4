@@ -14,7 +14,13 @@ Live site can be found [Here](https://deploma4-9a881a09cb04.herokuapp.com/)
    - [Intuitive and Consistent Design](#intuitive-and-consistent-design)
    - [Key UX Design Principles](#key-ux-design-principles)
 4. [Design](#design)
-   - [Colour Palette](#colour-palette)
+   - [Interface](#interface)
+     - [User Flow](#user-flow)
+     - [Mockups](#mockups)
+       - [Home Page Mockup](#home-mock)
+       - [Login & Register Page Mockup](#login-register-mock)
+       - [Dashboard Page Mockup](#dashboard-mock)
+     - [Rationale](#rationale)
    - [Features Walkthrough](#features-walkthrough)
      - [Home Page](#home-page)
        - [Nav Bar](#nav-bar)
@@ -112,11 +118,72 @@ By prioritising these UX elements, the platform delivers a robust and user-centr
 
 
 ## **Design**
+###  Interface
 
 ![Colour palette used in website: black, dark grey, white, jungle green and yellow](/README_assets/doc_image_1.png)
 - Black and white for background to text contrast.
 - Dark gray for container backgrounds, like the dashbaord, to distinguish itself from the background but still be seamless.
 - Jungle green and yellow as accent colours to provide unique style, and to distimguish different elements from eachother.
+
+
+To ensure an intuitive and well-structured user experience, I designed mockups before implementing the final version of the site. Below is a breakdown of the design process, including the rationale behind the choices made and how these have been carried through to implementation.
+
+#### User flow
+Showcase users navigation through the site, ensuring a logical and efficient experience.
+- Users start at the Home Page, where they can either register or log in.
+- After logging in, they are directed to the Dashboard, where they can:
+  - Create, edit, or delete job search profiles.
+  - Perform job searches based on their profile criteria.
+  - View and manage their search history.
+- The system ensures proper authentication, meaning users cannot access restricted features unless logged in.
+- If an error occurs (e.g., missing required fields), appropriate feedback is provided.
+
+#### Mockups
+##### Home mock
+![home page design mockup](/README_assets/doc_wf_1.png)
+- A simple hero section that introduces the platform and its functionality.
+- A login/register button in the navigation bar for easy access.
+- Key features are highlighted to provide an overview of what the platform offers.
+
+##### Login Register Mock
+![login page design mockup](/README_assets/doc_wf_2.png) ![register page design mockup](/README_assets/doc_wf_3.png)
+- Fields for username, email, password, confirm password.
+- Submit button for each form.
+- Validation messages to showcase error info.
+- Redirected to dashboard after successfull authentication.
+
+
+##### Dashboard Mock
+![dashboard page design mockup](/README_assets/doc_wf_4.png)
+- The dashboard is divided into two main sections:
+  - Profile Selection (left) → Users can select, edit, or delete job profiles.
+  - Main Content (right) → Users can search for jobs or view their search history.
+- On smaller screens, sections stack vertically to enhance readability.
+- Selected fields (like selected profile) background colour change.
+
+
+#### Rationale
+To create an optimal user experience, I followed UX best practices:
+
+- Simplicity & Minimalism
+  - Clean interface with a focus on essential actions.
+  - Avoided unnecessary distractions, ensuring users quickly find what they need.
+  - Responsiveness & Mobile-First Approach
+
+- Designed for mobile usability first, then expanded to desktop views.
+  - Used flexbox & media queries to ensure a smooth experience across all devices.
+  - Consistency & Intuitiveness
+
+- Navigation bar and footer remain consistent across all pages.
+  - CTA buttons (e.g., search, edit profile) use clear, bold text for better usability.
+  - Feedback & Error Handling
+
+- Visual indicators for successful actions (e.g., profile updates).
+  - Error messages guide users when something goes wrong (e.g., missing required fields).
+
+
+
+
 
 
 ## **Features Walkthrough**
@@ -126,6 +193,7 @@ Below is a showcase of the website in its features, design process and screen re
 ![snippet of home page](/README_assets/doc_image_2.png)
 - Home constists of a Nav bar, hero segment, info segment and a footer
 - Nav bar and footer are only 2 elements which are present and the same on all pages of this site.
+- Following the layout from the initial design mockup, fitting its rationale.
 
 #### Nav Bar
 ![snippet of nav bar](/README_assets/doc_image_3.png)
@@ -169,6 +237,7 @@ Nav bar is split into 2, left and right:
 
 - Very similluar styled pages due to nature of the content.
 - One dark grey container to differnentiate itself from the black backround
+- Following the layout from the initial design mockup, fitting its rationale.
 
 #### Input Fields
 ![snippet of login text fields](/README_assets/doc_image_11.png)
@@ -196,6 +265,7 @@ Nav bar is split into 2, left and right:
 
 - User can only access this page if they are authenticated (logged in)
 - One dark grey container to house all the dashbaord content.
+- Following the layout from the initial design mockup, fitting its rationale.
 
 ![snippet of dashboard container on bigger screens](/README_assets/doc_image_17.png)
 - Container is split into 2:
