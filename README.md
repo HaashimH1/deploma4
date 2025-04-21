@@ -14,6 +14,11 @@ Live site can be found [Here](https://deploma4-9a881a09cb04.herokuapp.com/)
    - [Intuitive and Consistent Design](#intuitive-and-consistent-design)
    - [Key UX Design Principles](#key-ux-design-principles)
 4. [Design](#design)
+   - [Agile Approach](#agile-approach)
+     - [Sprint 1: Project Setup & Authentication](#sprint-1-project-setup--authentication)
+     - [Sprint 2: Dashboard Functionality & Profile Logic](#sprint-2-dashboard-functionality--profile-logic)
+     - [Sprint 3: Styling, Responsiveness & UX Improvements](#sprint-3-styling-responsiveness--ux-improvements)
+     - [Overall Agile Workflow](#overall-agile-workflow)
    - [Interface](#interface)
      - [User Flow](#user-flow)
      - [Mockups](#mockups)
@@ -118,6 +123,97 @@ By prioritising these UX elements, the platform delivers a robust and user-centr
 
 
 ## **Design**
+### Agile Approach
+
+Throughout the development of this project, I followed an Agile methodology, breaking the work into manageable three sprints, each focusing on a specific part of the application. This approach allowed me to iteratively develop features while ensuring regular review, testing, and refinement across each stage. It also ensured better planning, user-focused feature delivery, and traceability of work via GitHub.
+
+---
+
+#### **Sprint 1: Project Setup & Authentication**
+
+**Objectives:**
+- Establish the Django project and initial app structure.
+- Set up PostgreSQL database connection.
+- Configure environment variables and Heroku settings.
+- Implement user registration, login, logout, and authentication mechanisms.
+- Create reusable `base.html` template and navigation components.
+- Static files directory to hold files such as the CSS and JS.
+
+**User Stories Tracked in GitHub:**
+- _As a user, I want to register for an account so that I can save profiles._
+- _As a user, I want to log in securely so that I can access personalised features._
+- _As a user, I want a smooth logout flow to ensure privacy and security._
+
+These were created as **GitHub Issues**, where each user story was broken down into individual tasks and linked to relevant commits. This made it easy to trace back each feature to its planning phase and ensured alignment with the original intentions.
+
+---
+
+#### **Sprint 2: Dashboard Functionality & Profile Logic**
+
+**Objectives:**
+- Develop the core dashboard view with active profile handling.
+- Create, edit, delete, and switch job search profiles.
+- Integrate the Adzuna API and set up job search queries.
+- Display both real-time job search results and search history based on profiles.
+- Implement database models for `Profile` and `JobSearchHistory`.
+
+**GitHub Issue Management:**
+For this sprint, the complexity increased, so I maintained granular tracking by:
+- Creating individual **issues for each model, function, and view logic**.
+- Assigning labels such as `profile`, `dashboard`, `API`, and `database` for quick filtering.
+- Using issue comments to track mid-task decisions and changes (e.g., shifting logic to utility files, handling errors).
+- Closing issues via commit messages using `Fixes #issue_number`, which helped maintain traceability.
+
+Example stories:
+- _As a user, I want to create multiple profiles with different job search settings._
+- _As a user, I want to search jobs based on my selected profile._
+- _As a user, I want to see a history of previous job searches._
+
+---
+
+#### **Sprint 3: Styling, Responsiveness & UX Improvements**
+
+**Objectives:**
+- Apply CSS for dark theme and contrasting accent colours (jungle green & yellow).
+- Implement responsive design with media queries to support desktop and mobile.
+- Refine dashboard layout with flexbox-based dynamic sections.
+- Improve accessibility (keyboard navigation, hover states, logical tab order).
+- Add feedback messages for actions like saving, updating, and error handling.
+
+**Agile Tracking via GitHub:**
+- Created issues specifically for **styling tasks per page** (e.g., "Mobile view for dashboard", "Responsive footer styling").
+- Maintained checklists within each issue to track sub-tasks (e.g., media query breakpoints, scrollbar customisation).
+- Used the GitHub **milestones feature** to link all issues under Sprint 3 and monitored completion status over time.
+
+Example stories:
+- _As a user, I want the site to be fully usable on my mobile device._
+- _As a user, I want clear visual cues (colours, spacing) to guide my interaction._
+- _As a user, I want to see feedback messages when I save or edit a profile._
+
+---
+
+#### **Overall Agile Workflow**
+
+##### **GitHub Issues as a Planning & Progress Tracker**
+- All major **features and components were scoped as user stories** and added to GitHub Issues.
+- Each issue included:
+  - A **clear description** of the expected outcome.
+  - Linked commits and branches to track implementation.
+  - Labels (`feature`, `enhancement`, `bug`, etc.) to categorise work.
+- Issues were **closed via commits** using keywords (`Fixes #`, `Closes #`) ensuring traceable, issue-driven development.
+- This helped replicate a **real-world team workflow**, even in a solo setting.
+
+##### **Commit Hygiene**
+- Made **small, frequent commits** aligned to each task.
+- Commit messages reflected the feature/fix and linked to the relevant issue when applicable.
+- Branches were occasionally used for experimental changes or isolated testing before merging to main.
+
+---
+
+This Agile approach ensured that development remained structured, measurable, and reflective of real-world software workflows. It also helped maintain alignment with project goals, user expectations, and assessment criteria throughout the build.
+
+
+
 ###  Interface
 
 ![Colour palette used in website: black, dark grey, white, jungle green and yellow](/README_assets/doc_image_1.png)
